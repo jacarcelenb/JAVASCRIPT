@@ -5,13 +5,13 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/CSS/estilos.css">
+    <link rel="stylesheet" href="../css/estilos.css">
     <!-- Bootstrap CSS -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 </head>
@@ -48,9 +48,9 @@
                 </div>
             </div>
         </nav>
-        <br/>
-        <br/>
+
         <div class="actions-menu">
+            <h1>Mascotas</h1>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#exampleModal">Nuevo</button>
         </div>
@@ -72,9 +72,11 @@
                     <td>@mdo</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-warning"><i class="fa fa-bars" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-window-close-o" aria-hidden="true"></i></button>
-                            
+                            <button type="button" class="btn btn-warning"><i class="fa fa-bars"
+                                    aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="fa fa-window-close-o"
+                                    aria-hidden="true"></i></button>
+
                         </div>
                     </td>
                 </tr>
@@ -85,9 +87,11 @@
                     <td>@fat</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-warning"><i class="fa fa-bars" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-window-close-o" aria-hidden="true"></i></button>
-                            
+                            <button type="button" class="btn btn-warning"><i class="fa fa-bars"
+                                    aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="fa fa-window-close-o"
+                                    aria-hidden="true"></i></button>
+
                         </div>
                     </td>
                 </tr>
@@ -97,9 +101,11 @@
                     <td>@twitter</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" class="btn btn-warning"><i class="fa fa-bars" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-window-close-o" aria-hidden="true"></i></button>
-                            
+                            <button type="button" class="btn btn-warning"><i class="fa fa-bars"
+                                    aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-danger"><i class="fa fa-window-close-o"
+                                    aria-hidden="true"></i></button>
+
                         </div>
                     </td>
                 </tr>
@@ -117,24 +123,29 @@
                 <div class="modal-body">
                     <form>
                         <div class="col">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
+                            <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre">
 
-                        </div>
-                        <div class="col">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <br />
                         <div class="col">
-                            <select class="form-control" id="selectmenu" aria-label="Default select example">
-                                <option selected>Tipo de animal</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <select class="form-control" id="propietario" aria-label="Default select example">
+                                <option>Propietario</option>
+                                <option>Esteban</option>
+                                <option>Gabriela</option>
+                                <option>Pamela</option>
+                                <option>Otto</option>
+                            </select>
+
+                        </div>
+                        <br />
+                        <div class="col">
+                            <select class="form-control" id="tipoanimal" aria-label="Default select example">
+                                <option>Tipo de animal</option>
+                                <option>Perro</option>
+                                <option>Gato</option>
+                                <option>Pajaro</option>
+                                <option>Otro</option>
                             </select>
                         </div>
 
