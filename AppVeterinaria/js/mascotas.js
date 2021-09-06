@@ -48,9 +48,7 @@ function enviarDatos(evento) {
         propietario: propietario.value
 
     };
-
     const accion = btnGuardar.innerHTML;
-
     switch (accion) {
         case 'Editar':
             // editar 
@@ -72,7 +70,6 @@ function enviarDatos(evento) {
 // patron closure
 function editar(id) {
     btnGuardar.innerText = 'Editar';
-    $('#exampleModal').modal('toggle')
     return function handler() {
         const mascota = mascotas[id];
         nombre.value = mascota.nombre;
@@ -88,6 +85,7 @@ function resetModal() {
     tipoanimal.value ="";
     indiceEditar.value = "";
     btnGuardar.innerText = 'Crear';
+    console.log("fkadlfkadf");
 }
 listarMascotas();
 form.onsubmit = enviarDatos;
