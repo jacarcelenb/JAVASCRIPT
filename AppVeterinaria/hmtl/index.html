@@ -58,10 +58,10 @@
             <thead class="table-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Opciones</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Propietario</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody id="lista-mascotas">
@@ -78,7 +78,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="form">
+                        <input type="hidden" id="indice">
                         <div class="col">
                             <label for="exampleInputEmail1" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre">
@@ -109,8 +110,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button   type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btn-guardar" type="button"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
         </div>
