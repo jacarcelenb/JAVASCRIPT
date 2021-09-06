@@ -42,6 +42,7 @@ function listarMascotas() {
 
 function enviarDatos(evento) {
     evento.preventDefault();
+   
     const datos = {
         tipo: tipoanimal.value,
         nombre: nombre.value,
@@ -60,11 +61,10 @@ function enviarDatos(evento) {
             mascotas.push(datos);
             break;
     }
-
-
-
+    
     listarMascotas();
     resetModal();
+ 
 
 }
 // patron closure
@@ -77,6 +77,7 @@ function editar(id) {
         tipoanimal.value = mascota.tipo;
         indiceEditar.value = id;
     }
+   
 }
 
 function resetModal() {
