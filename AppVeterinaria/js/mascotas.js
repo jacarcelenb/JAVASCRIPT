@@ -78,7 +78,7 @@ function editar(id) {
    
     return function handler() {
         btnGuardar.innerHTML = 'Editar';
-        myModal.toggle();
+        myModal.show();
         const mascota = mascotas[id];
         nombre.value = mascota.nombre;
         propietario.value = mascota.propietario;
