@@ -6,6 +6,9 @@ const tipoanimal = document.getElementById("tipoanimal");
 const form = document.getElementById("form");
 const btnGuardar = document.getElementById('btn-guardar');
 const indiceEditar = document.getElementById('indice');
+var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+    keyboard: false
+  })
 
 let mascotas = [
     {
@@ -26,8 +29,7 @@ function listarMascotas() {
     <td>${mascota.propietario}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-            <button type="button" class="btn btn-warning editar" data-bs-toggle="modal"
-            data-bs-target="#exampleModal"><i class="fa fa-bars"
+            <button type="button" class="btn btn-warning editar"><i class="fa fa-bars"
                     aria-hidden="true"></i></button>
             <button type="button" class="btn btn-danger"><i class="fa fa-window-close-o"
                     aria-hidden="true"></i></button>
@@ -43,17 +45,20 @@ function listarMascotas() {
 function enviarDatos(evento) {
     evento.preventDefault();
    
+    const accion = btnGuardar.innerHTML;
     const datos = {
         tipo: tipoanimal.value,
         nombre: nombre.value,
         propietario: propietario.value
 
     };
-    const accion = btnGuardar.innerHTML;
+   
     switch (accion) {
         case 'Editar':
             // editar 
             mascotas[indiceEditar.value] = datos;
+            console.log("entro en switch")
+            resetModal();
             break;
 
         default:
@@ -61,7 +66,8 @@ function enviarDatos(evento) {
             mascotas.push(datos);
             break;
     }
-    
+    console.log("Valor de la accion")
+    console.log(accion)
     listarMascotas();
     resetModal();
  
@@ -69,8 +75,10 @@ function enviarDatos(evento) {
 }
 // patron closure
 function editar(id) {
-    btnGuardar.innerText = 'Editar';
+   
     return function handler() {
+        btnGuardar.innerHTML = 'Editar';
+        myModal.toggle();
         const mascota = mascotas[id];
         nombre.value = mascota.nombre;
         propietario.value = mascota.propietario;
