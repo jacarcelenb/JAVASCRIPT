@@ -10,12 +10,22 @@ const server = http.createServer((req ,res)=>{
     
     // obtener la ruta
     const ruta = urlParseada.pathname;
+
+    // quitar slash
+    const rutaLimpia = ruta.replace(/^\/+|\/+$/g, "");
+
+    // obtener el metodo http
+    console.log('metodo http ',req.method)
     // enviar una respuesta dependiendo de la ruta
-    if (ruta === '/ruta') {
-        res.end('Hola estas en /ruta');
-    }else{
-        res.end('estas en una ruta que no conozco');
-    }
+   switch (rutaLimpia) {
+       case 'ruta':
+           res.end('estas en la ruta conocida')
+           break;
+       default:
+           res.end('ruta desconocida')
+           break;
+
+   }
 
     //res.end();
 });
