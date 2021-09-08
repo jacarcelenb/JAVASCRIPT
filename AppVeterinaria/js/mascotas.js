@@ -4,7 +4,7 @@ const propietario = document.getElementById("propietario");
 const tipoanimal = document.getElementById("tipoanimal");
 const form = document.getElementById("form");
 const btnGuardar = document.getElementById('btn-guardar');
-const btnClose = document.getElementById('btn-close');
+const btnCerrar = document.getElementById('btn-closemodal');
 const btnCancelar = document.getElementById('btn-cancelar');
 const indiceEditar = document.getElementById('indice');
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
@@ -93,8 +93,8 @@ function editar(id) {
 
 function eliminar(indice) {
     return function clickEliminar() {
-       mascotas = mascotas.filter((mascota , indicemascota) => indicemascota !== indice);
-       listarMascotas();
+        mascotas = mascotas.filter((mascota, indicemascota) => indicemascota !== indice);
+        listarMascotas();
     }
 
 }
@@ -110,5 +110,5 @@ function resetModal() {
 listarMascotas();
 form.onsubmit = enviarDatos;
 btnGuardar.onclick = enviarDatos;
-btnClose.onclick = resetModal;
 btnCancelar.onclick = resetModal;
+btnCerrar.onclick = resetModal;
