@@ -1,4 +1,4 @@
-const listaVeterinarios = document.getElementById("lista-veterinarios");
+const listaDuenos = document.getElementById("lista-duenos");
 const nombre = document.getElementById("nombre");
 const apellido = document.getElementById("apellido");
 const pais = document.getElementById("pais");
@@ -12,25 +12,25 @@ var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
 
-let veterinarios = [
+let duenos = [
     {
-        nombre: "Margaret",
-        apellido: "Diaz",
-        identificacion: "100450018-7",
+        nombre: "James",
+        apellido: "Carter",
+        identificacion: "100454448-7",
         pais: "Japon"
     }
 ]
 
-function listarVeterinarios() {
+function listarDuenos() {
     // la funcion map recorre el arreglo y ejecuta el callback
     // funcion join para evitar que los elementos hmtl se junten
-    let htmlVeterinarios = veterinarios.map((veterinario, indice) => `
+    let htmlDuenos = duenos.map((dueno, indice) => `
     <tr>
     <th scope="row">${indice}</th>
-    <td>${veterinario.identificacion}</td>
-    <td>${veterinario.nombre}</td>
-    <td>${veterinario.apellido}</td>
-    <td>${veterinario.pais}</td>
+    <td>${dueno.identificacion}</td>
+    <td>${dueno.nombre}</td>
+    <td>${dueno.apellido}</td>
+    <td>${dueno.pais}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-warning editar"><i class="fa fa-bars"
@@ -41,7 +41,7 @@ function listarVeterinarios() {
         </div>
     </td>
 </tr>`).join("");
-    listaVeterinarios.innerHTML = htmlVeterinarios;
+    listaDuenos.innerHTML = htmlDuenos;
     Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) =>
         botonEditar.onclick = editar(index))
     Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) =>
@@ -63,17 +63,17 @@ function enviarDatos(evento) {
     switch (accion) {
         case 'Editar':
             // editar 
-            veterinarios[indiceEditar.value] = datos;
+            duenos[indiceEditar.value] = datos;
             console.log("entro en switch")
             resetModal();
             break;
 
         default:
             // crear
-            veterinarios.push(datos);
+            duenos.push(datos);
             break;
     }
-    listarVeterinarios();
+    listarDuenos();
     resetModal();
 
 
@@ -84,11 +84,11 @@ function editar(id) {
     return function handler() {
         btnGuardar.innerHTML = 'Editar';
         myModal.show();
-        const veterinario = veterinarios[id];
-        identificacion.value = veterinario.identificacion;
-        nombre.value = veterinario.nombre;
-        apellido.value = veterinario.apellido;
-        pais.value = veterinario.pais;
+        const dueno = duenos[id];
+        identificacion.value = dueno.identificacion;
+        nombre.value = dueno.nombre;
+        apellido.value = dueno.apellido;
+        pais.value = dueno.pais;
         indiceEditar.value = id;
     }
 
@@ -96,8 +96,8 @@ function editar(id) {
 
 function eliminar(indice) {
     return function clickEliminar() {
-        veterinarios = veterinarios.filter((veterinario, indiceveterinario) => indiceveterinario !== indice);
-        listarVeterinarios();
+        duenos = duenos.filter((dueno, indicedueno) => indicedueno !== indice);
+        listarDuenos();
     }
 
 }
@@ -111,7 +111,7 @@ function resetModal() {
     btnGuardar.innerText = 'Crear';
 }
 
-listarVeterinarios();
+listarDuenos();
 form.onsubmit = enviarDatos;
 btnGuardar.onclick = enviarDatos;
 btnCancelar.onclick = resetModal;
