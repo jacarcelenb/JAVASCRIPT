@@ -37,6 +37,33 @@ const server = http.createServer((req ,res)=>{
        buffer += decoder.end();
        
      });
+     // ordenar la data
+     const data = {
+         ruta: rutaLimpia,
+         query,
+         metodo,
+         headers,
+         payload: buffer
+     };
+     // elegir el manejador de la respuesta
+     let handler;
+     if (rutaLimpia && enrutador[rutaLimpia]) {
+         handler = enrutador[rutaLimpia];
+     }else{
+         handler = enrutador.noEncontrado;
+     }
+
+     // ejecutar handler para enviar la respuesta
+     if (typeof handler == 'function') {
+         handler(data,(status = 200 , mensaje)=>{
+         const respuesta = JSON.stringify(mensaje);
+         res.writeHead(status)
+         // linea donde realmente se responde a la aplicacion cliente
+         res.end(respuesta)
+         })
+     } else {
+         
+     }
     // enviar una respuesta dependiendo de la ruta
    switch (rutaLimpia) {
        case 'ruta':
@@ -47,12 +74,18 @@ const server = http.createServer((req ,res)=>{
            break;
 
    }
+   const enrutador = {
+       ruta: {data , callback}= () => {
+           callback(200 , {mensaje: 'esta es /ruta'})
+       },
+       noEncontrado:{data , callback} = () =>{
+        callback(404,{mensaje:'no encontrado'})
+    }
+       
+   }
 
     //res.end();
-});
-server.on('clientError',(err,socket)=>{
-    socket.end('HTTP/1.1 400 Bad Request \r\n\r\n');
-});
+}); 
 server.listen(8000 , () =>{
     console.log('server listen in http://localhost:8000/');
 });
