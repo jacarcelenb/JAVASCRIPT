@@ -16,6 +16,10 @@ const server = http.createServer((req ,res)=>{
 
     // obtener el metodo http
     console.log('metodo http ',req.method)
+
+    // obtener variables del query url
+    const {query = {}} = urlParseada;
+    console.log({query});
     // enviar una respuesta dependiendo de la ruta
    switch (rutaLimpia) {
        case 'ruta':
