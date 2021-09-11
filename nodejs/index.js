@@ -16,6 +16,7 @@ const server = http.createServer((req ,res)=>{
     const rutaLimpia = ruta.replace(/^\/+|\/+$/g, "");
 
     // obtener el metodo http
+    const metodo = req.method;
     console.log('metodo http ',req.method)
 
     // obtener variables del query url
