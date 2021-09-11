@@ -3,6 +3,8 @@
 const http = require('http');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
+
+
 const server = http.createServer((req ,res)=>{
    
     // obtener url desde el objeto request req.url
@@ -17,15 +19,10 @@ const server = http.createServer((req ,res)=>{
 
     // obtener el metodo http
     const metodo = req.method;
-    console.log('metodo http ',req.method)
-
     // obtener variables del query url
     const {query = {}} = urlParseada;
-    console.log({query});
     // obtener los headers
     const {headers} = req;
-   
-    console.log({headers});
      // obtener payload en el caso de haber uno
      const decoder = new StringDecoder('utf-8');
      let buffer = '';
@@ -38,16 +35,28 @@ const server = http.createServer((req ,res)=>{
        buffer += decoder.end();
        
      });
-     // ordenar la data
+
      const data = {
          ruta: rutaLimpia,
-         query,
          metodo,
+         query,
          headers,
          payload: buffer
-     };
-     // elegir el manejador de la respuesta
-     let handler;
+     }
+
+     const enrutador = {
+        ruta: (data, callback) => {
+            callback(200, { mensaje: "esta es /ruta" });
+          },
+          noEncontrado: (data, callback) => {
+            callback(404, { mensaje: "no encontrado" });
+          },
+     }
+        
+    
+
+ // elegir el manejador de la respuesta
+   let handler;
      if (rutaLimpia && enrutador[rutaLimpia]) {
          handler = enrutador[rutaLimpia];
      }else{
@@ -62,31 +71,13 @@ const server = http.createServer((req ,res)=>{
          // linea donde realmente se responde a la aplicacion cliente
          res.end(respuesta)
          })
-     } else {
-         
-     }
-    // enviar una respuesta dependiendo de la ruta
-   switch (rutaLimpia) {
-       case 'ruta':
-           res.end('estas en la ruta conocida')
-           break;
-       default:
-           res.end('ruta desconocida')
-           break;
-
-   }
-   const enrutador = {
-       ruta: {data , callback}= () => {
-           callback(200 , {mensaje: 'esta es /ruta'})
-       },
-       noEncontrado:{data , callback} = () =>{
-        callback(404,{mensaje:'no encontrado'})
-    }
-       
-   }
-
-    //res.end();
+     } 
+    
+  
+   
 }); 
+
 server.listen(8000 , () =>{
     console.log('server listen in http://localhost:8000/');
 });
+
