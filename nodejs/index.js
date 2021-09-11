@@ -2,6 +2,7 @@
 // comando node seguido del nombre del archivo.js ejecuta ese archivo en node js
 const http = require('http');
 const url = require('url');
+const StringDecoder = require('string_decoder').StringDecoder;
 const server = http.createServer((req ,res)=>{
    
     // obtener url desde el objeto request req.url
@@ -20,6 +21,22 @@ const server = http.createServer((req ,res)=>{
     // obtener variables del query url
     const {query = {}} = urlParseada;
     console.log({query});
+    // obtener los headers
+    const {headers} = req;
+   
+    console.log({headers});
+     // obtener payload en el caso de haber uno
+     const decoder = new StringDecoder('utf-8');
+     let buffer = '';
+     req.on('data',(data)=>{
+       buffer += decoder.write(data);
+
+     });
+
+     req.on('end',()=>{
+       buffer += decoder.end();
+       
+     });
     // enviar una respuesta dependiendo de la ruta
    switch (rutaLimpia) {
        case 'ruta':
