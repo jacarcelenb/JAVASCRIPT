@@ -4,6 +4,14 @@ const http = require('http');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 
+let recursos = {
+  mascotas: [
+    {tipo: "perro" , nombre: "Trusky" , propietario: "Camilo" },
+    {tipo: "perro" , nombre: "Trusky" , propietario: "Camilo" },
+    {tipo: "perro" , nombre: "Trusky" , propietario: "Camilo" },
+    {tipo: "perro" , nombre: "Trusky" , propietario: "Camilo" }]
+}
+
 
 const server = http.createServer((req ,res)=>{
    
@@ -48,6 +56,9 @@ const server = http.createServer((req ,res)=>{
         ruta: (data, callback) => {
             callback(200, { mensaje: "esta es /ruta" });
           },
+        mascotas: (data, callback) => {
+            callback(200, recursos.mascotas);
+          },
           noEncontrado: (data, callback) => {
             callback(404, { mensaje: "no encontrado" });
           },
@@ -67,6 +78,7 @@ const server = http.createServer((req ,res)=>{
      if (typeof handler == 'function') {
          handler(data,(status = 200 , mensaje)=>{
          const respuesta = JSON.stringify(mensaje);
+         res.setHeader('Content-Type','application/json')
          res.writeHead(status)
          // linea donde realmente se responde a la aplicacion cliente
          res.end(respuesta)
