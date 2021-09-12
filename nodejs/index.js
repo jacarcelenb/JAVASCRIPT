@@ -63,15 +63,17 @@ const server = http.createServer((req, res) => {
     },
     noEncontrado: (data, callback) => {
       callback(404, { mensaje: "no encontrado" });
-    },
+    }
   }
 
 
 
   // elegir el manejador de la respuesta
   let handler;
-  if (rutaLimpia && enrutador[rutaLimpia] && enrutador[rutaLimpia][metodo]) {
-    handler = enrutador[rutaLimpia][metodo];
+  console.log(enrutador[rutaLimpia])
+  console.log(metodo.toLowerCase())
+  if (rutaLimpia && enrutador[rutaLimpia] && enrutador[rutaLimpia]) {
+    handler = enrutador[rutaLimpia];
   } else {
     handler = enrutador.noEncontrado;
   }
