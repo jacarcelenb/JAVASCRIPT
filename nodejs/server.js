@@ -26,7 +26,7 @@ const server = http.createServer((req, res) => {
   const rutaLimpia = ruta.replace(/^\/+|\/+$/g, "");
 
   // obtener el metodo http
-  const metodo = req.method;
+  const metodo = req.method.toLowerCase();
   // obtener variables del query url
   const { query = {} } = urlParseada;
   // obtener los headers
@@ -70,8 +70,8 @@ const server = http.createServer((req, res) => {
 
   // elegir el manejador de la respuesta
   let handler;
-  if (rutaLimpia && enrutador[rutaLimpia] && enrutador[rutaLimpia][metodo]) {
-    handler = enrutador[rutaLimpia][metodo];
+  if (data.ruta && enrutador[data.ruta] && enrutador[data.ruta][metodo]) {
+    handler = enrutador[data.ruta][metodo];
   } else {
     handler = enrutador.noEncontrado;
   }
