@@ -70,12 +70,8 @@ const server = http.createServer((req, res) => {
 
   // elegir el manejador de la respuesta
   let handler;
-  console.log("enrutador-------------")
-  console.log(enrutador)
-  console.log(enrutador[rutaLimpia])
-  console.log(metodo.toLowerCase())
-  if (rutaLimpia && enrutador[rutaLimpia] && enrutador[rutaLimpia]) {
-    handler = enrutador[rutaLimpia];
+  if (rutaLimpia && enrutador[rutaLimpia] && enrutador[rutaLimpia][metodo]) {
+    handler = enrutador[rutaLimpia][metodo];
   } else {
     handler = enrutador.noEncontrado;
   }
