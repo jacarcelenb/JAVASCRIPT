@@ -33,7 +33,7 @@ const server = http.createServer((req, res) => {
   const { headers } = req;
   // obtener payload en el caso de haber uno
   const decoder = new StringDecoder('utf-8');
-  let buffer = '';
+  let buffer = "";
   req.on('data', (data) => {
     buffer += decoder.write(data);
 
@@ -44,7 +44,7 @@ const server = http.createServer((req, res) => {
 
   });
 
-  if (headers["content-type"] == "application/json") {
+  if (headers['Content-Type'] == 'application/json') {
     buffer = JSON.parse(buffer);
   }
 
