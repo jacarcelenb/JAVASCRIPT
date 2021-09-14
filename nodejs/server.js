@@ -9,7 +9,7 @@ let recursos = {
     { tipo: "perro", nombre: "Trusky", propietario: "Camilo" },
     { tipo: "perro", nombre: "Trusky", propietario: "Camilo" },
     { tipo: "perro", nombre: "Trusky", propietario: "Camilo" },
-    { tipo: "perro", nombre: "Trusky", propietario: "Camilo" }]
+    { tipo: "perro", nombre: "Trusky", propietario: "Jorge" }]
 }
 
 
@@ -44,6 +44,10 @@ const server = http.createServer((req, res) => {
 
   });
 
+  if (headers["content-type"] == "application/json") {
+    buffer = JSON.parse(buffer);
+  }
+
   const data = {
     ruta: rutaLimpia,
     metodo,
@@ -59,6 +63,10 @@ const server = http.createServer((req, res) => {
     mascotas: {
       get: (data, callback) => {
         callback(200, recursos.mascotas);
+      },
+      post: (data, callback) => {
+        recursos.mascotas.push(data.payload);
+        callback(201, data.payload);
       },
     },
     noEncontrado: (data, callback) => {
