@@ -42,11 +42,13 @@ const server = http.createServer((req, res) => {
   req.on('end', () => {
     buffer += decoder.end();
 
+
+    if (headers['Content-Type'] == 'application/json') {
+      buffer = JSON.parse(buffer);
+    }
   });
 
-  if (headers['Content-Type'] == 'application/json') {
-    buffer = JSON.parse(buffer);
-  }
+  
 
   const data = {
     ruta: rutaLimpia,
@@ -95,7 +97,7 @@ const server = http.createServer((req, res) => {
     })
   }
 
-
+console.log(data)
 
 });
 
