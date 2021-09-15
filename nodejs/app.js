@@ -100,6 +100,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(8000, () => {
-  console.log('server listen in http://localhost:3500/');
+  console.log('server listen in https://localhost:3500/');
 });
 
