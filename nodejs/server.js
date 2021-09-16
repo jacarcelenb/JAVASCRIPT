@@ -1,92 +1,11 @@
 //console.log("hola mundo");
 // comando node seguido del nombre del archivo.js ejecuta ese archivo en node js
 const http = require('http');
-const url = require('url');
-const StringDecoder = require('string_decoder').StringDecoder;
-const enrutador = require('./enrutador');
+const requestHandler = require('./request-handler');
+const recursos = require('./recursos');
+global.recursos = recursos;
 
-global.recursos = {
-  mascotas: [
-    { tipo: "perro", nombre: "Trusky", propietario: "Camilo" },
-    { tipo: "perro", nombre: "Trusky", propietario: "Camilo" },
-    { tipo: "perro", nombre: "Trusky", propietario: "Camilo" },
-    { tipo: "perro", nombre: "Trusky", propietario: "Jorge" }]
-}
-
-
-const CallbackDelServidor = (req, res) => {
-
-  // obtener url desde el objeto request req.url
-  const urlActual = req.url;
-  const urlParseada = url.parse(urlActual, true);
-
-  // obtener la ruta
-  const ruta = urlParseada.pathname;
-
-  // quitar slash
-  const rutaLimpia = ruta.replace(/^\/+|\/+$/g, "");
-
-  // obtener el metodo http
-  const metodo = req.method.toLowerCase();
-  // obtener variables del query url
-  const { query = {} } = urlParseada;
-  // obtener los headers
-  const { headers = {} } = req;
-  // obtener payload en el caso de haber uno
-  const decoder = new StringDecoder('utf-8');
-  let buffer = "";
-  req.on("data", (data) => {
-    buffer += decoder.write(data);
-
-  });
-
-  req.on("end", () => {
-    buffer += decoder.end();
-
-    if (headers["content-type"] === 'application/json') {
-      buffer=JSON.parse(buffer);
-    }
-    if(rutaLimpia.indexOf("/") > -1){
-      // separar las rutas
-      var [rutaPrincipal , indice] = rutaLimpia.split('/');
-    }
-    const data = {
-      indice,
-      ruta: rutaPrincipal || rutaLimpia,
-      metodo,
-      query,
-      headers,
-      payload: buffer
-    }
-
-   
-    console.log({ data })
-
-    // elegir el manejador de la respuesta
-    let handler;
-    if (data.ruta && enrutador[data.ruta] && enrutador[data.ruta][metodo]) {
-      handler = enrutador[data.ruta][metodo];
-    } else {
-      handler = enrutador.noEncontrado;
-    }
-
-    // ejecutar handler para enviar la respuesta
-    if (typeof handler == 'function') {
-      handler(data, (status = 200, mensaje) => {
-        const respuesta = JSON.stringify(mensaje);
-        res.setHeader('Content-Type', 'application/json')
-        res.writeHead(status)
-        // linea donde realmente se responde a la aplicacion cliente
-        res.end(respuesta)
-      })
-    }
-
-  });
-
-}
-
-
-const server = http.createServer(CallbackDelServidor)
+const server = http.createServer(requestHandler)
 server.listen(8000, () => {
   console.log('server listen in http://localhost:8000/');
 });
