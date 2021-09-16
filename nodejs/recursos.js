@@ -12,4 +12,11 @@ module.exports = {
         {nombre: "James", apellido: "Mena" , documento: "1987400184"},
     ],
 
+    propietarios: [
+        {nombre: "Luis", apellido: "Mendez" , documento: "1005400154"},
+        {nombre: "Alex", apellido: "Garcia" , documento: "1785400152"},
+        {nombre: "Carmen", apellido: "Loma" , documento: "1335400151"},
+        {nombre: "Jaime", apellido: "Mendez" , documento: "1205400159"},
+    ]
+
 }
