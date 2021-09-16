@@ -45,14 +45,20 @@ const server = http.createServer((req, res) => {
     if (headers["content-type"] === 'application/json') {
       buffer=JSON.parse(buffer);
     }
-
+    if(rutaLimpia.indexOf("/") > -1){
+      // separar las rutas
+      var [rutaPrincipal , indice] = rutaLimpia.split('/');
+    }
     const data = {
-      ruta: rutaLimpia,
+      indice,
+      ruta: rutaPrincipal || rutaLimpia,
       metodo,
       query,
       headers,
       payload: buffer
     }
+
+   
     console.log({ data })
 
 
@@ -62,6 +68,12 @@ const server = http.createServer((req, res) => {
       },
       mascotas: {
         get: (data, callback) => {
+          if (data.indice) {
+            if (recursos.mascotas[data.indice]) {
+              return callback(200, recursos.mascotas[data.indice]);
+            }
+            return callback(404, { mensaje: `mascota con indice ${data.indice} no encontrado` });
+          }
           callback(200, recursos.mascotas);
         },
         post: (data, callback) => {
@@ -100,6 +112,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(8000, () => {
-  console.log('server listen in https://localhost:8500/');
+  console.log('server listen in http://localhost:8000/');
 });
 
