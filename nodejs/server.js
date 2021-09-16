@@ -14,7 +14,7 @@ global.recursos = {
 }
 
 
-const server = http.createServer((req, res) => {
+const CallbackDelServidor = (req, res) => {
 
   // obtener url desde el objeto request req.url
   const urlActual = req.url;
@@ -83,8 +83,10 @@ const server = http.createServer((req, res) => {
 
   });
 
-});
+}
 
+
+const server = http.createServer(CallbackDelServidor)
 server.listen(8000, () => {
   console.log('server listen in http://localhost:8000/');
 });
