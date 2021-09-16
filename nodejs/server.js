@@ -3,8 +3,9 @@
 const http = require('http');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
+const enrutador = require('./enrutador');
 
-let recursos = {
+global.recursos = {
   mascotas: [
     { tipo: "perro", nombre: "Trusky", propietario: "Camilo" },
     { tipo: "perro", nombre: "Trusky", propietario: "Camilo" },
@@ -60,33 +61,6 @@ const server = http.createServer((req, res) => {
 
    
     console.log({ data })
-
-
-    const enrutador = {
-      ruta: (data, callback) => {
-        callback(200, { mensaje: "esta es /ruta" });
-      },
-      mascotas: {
-        get: (data, callback) => {
-          if (data.indice) {
-            if (recursos.mascotas[data.indice]) {
-              return callback(200, recursos.mascotas[data.indice]);
-            }
-            return callback(404, { mensaje: `mascota con indice ${data.indice} no encontrado` });
-          }
-          callback(200, recursos.mascotas);
-        },
-        post: (data, callback) => {
-          recursos.mascotas.push(data.payload);
-          callback(201, data.payload);
-        },
-      },
-      noEncontrado: (data, callback) => {
-        callback(404, { mensaje: "no encontrado" });
-      }
-    }
-
-
 
     // elegir el manejador de la respuesta
     let handler;
