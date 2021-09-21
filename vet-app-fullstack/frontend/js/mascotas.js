@@ -108,6 +108,15 @@ function resetModal() {
     console.log("fkadlfkadf");
 }
 listarMascotas();
+function solicitarMascotas(){
+    fetch("http://localhost:8000/mascotas").then((respuesta)=> {
+        if (respuesta.ok) {
+            return respuesta.json();
+        }
+    }).then(mascotasServidor =>{
+        console.log({mascotasServidor})
+    })
+}
 form.onsubmit = enviarDatos;
 btnGuardar.onclick = enviarDatos;
 btnCancelar.onclick = resetModal;
