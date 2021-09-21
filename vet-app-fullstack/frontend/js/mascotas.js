@@ -20,6 +20,7 @@ let mascotas = [
 ]
 
 function listarMascotas() {
+    solicitarMascotas();
     // la funcion map recorre el arreglo y ejecuta el callback
     // funcion join para evitar que los elementos hmtl se junten
     let htmlMascotas = mascotas.map((mascota, indice) => `
