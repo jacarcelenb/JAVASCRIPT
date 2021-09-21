@@ -7,6 +7,7 @@ const btnGuardar = document.getElementById('btn-guardar');
 const btnCerrar = document.getElementById('btn-closemodal');
 const btnCancelar = document.getElementById('btn-cancelar');
 const indiceEditar = document.getElementById('indice');
+const url = "http://localhost:8000/mascotas";
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
@@ -19,8 +20,19 @@ let mascotas = [
     }
 ]
 
-function listarMascotas() {
-    solicitarMascotas();
+async function listarMascotas() {
+
+    try {
+        const respuesta = await fetch(url);
+        const mascotasServidor = await respuesta.json();
+        if (Array.isArray(mascotasServidor) && mascotasServidor.length > 0) {
+            mascotas = mascotasServidor;
+        }
+    } catch (error) {
+        throw error;
+    }
+
+
     // la funcion map recorre el arreglo y ejecuta el callback
     // funcion join para evitar que los elementos hmtl se junten
     let htmlMascotas = mascotas.map((mascota, indice) => `
@@ -46,34 +58,50 @@ function listarMascotas() {
         botonEliminar.onclick = eliminar(index))
 }
 
-function enviarDatos(evento) {
+async function enviarDatos(evento) {
     evento.preventDefault();
 
-    const accion = btnGuardar.innerHTML;
-    const datos = {
-        tipo: tipoanimal.value,
-        nombre: nombre.value,
-        propietario: propietario.value
+    try {
+        const accion = btnGuardar.innerHTML;
+        const datos = {
+            tipo: tipoanimal.value,
+            nombre: nombre.value,
+            propietario: propietario.value
 
-    };
+        };
+        let method = "POST";
+        let urlEnvio = url;
 
-    switch (accion) {
-        case 'Editar':
+
+        if (accion === 'Editar') {
             // editar 
+            method = "PUT";
             mascotas[indiceEditar.value] = datos;
-            console.log("entro en switch")
-            resetModal();
-            break;
+            urlEnvio = `${url}/${indiceEditar.value}`
+        }
 
-        default:
-            // crear
-            mascotas.push(datos);
-            break;
+        const respuesta = await fetch(url, {
+            method, // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos),
+        })
+
+
+        if (respuesta.ok) {
+            listarMascotas();
+            resetModal();
+
+        } else {
+            resetModal();
+        }
+    } catch (error) {
+        throw error;
     }
-    console.log("Valor de la accion")
-    console.log(accion)
-    listarMascotas();
-    resetModal();
+
+
+
 
 
 }
@@ -109,14 +137,8 @@ function resetModal() {
     console.log("fkadlfkadf");
 }
 listarMascotas();
-function solicitarMascotas(){
-    fetch("http://localhost:8000/mascotas").then((respuesta)=> {
-        if (respuesta.ok) {
-            return respuesta.json();
-        }
-    }).then(mascotasServidor =>{
-        console.log({mascotasServidor})
-    })
+function solicitarMascotas() {
+
 }
 form.onsubmit = enviarDatos;
 btnGuardar.onclick = enviarDatos;
