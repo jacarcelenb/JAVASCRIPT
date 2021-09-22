@@ -28,14 +28,9 @@ async function listarMascotas() {
         if (Array.isArray(mascotasServidor)) {
             mascotas = mascotasServidor;
         }
-    } catch (error) {
-        throw error;
-    }
 
-
-    // la funcion map recorre el arreglo y ejecuta el callback
-    // funcion join para evitar que los elementos hmtl se junten
-    let htmlMascotas = mascotas.map((mascota, indice) => `
+        if (mascotas.length) {
+            let htmlMascotas = mascotas.map((mascota, indice) => `
     <tr>
     <th scope="row">${indice}</th>
     <td>${mascota.tipo}</td>
@@ -51,11 +46,27 @@ async function listarMascotas() {
         </div>
     </td>
 </tr>`).join("");
-    listaMascotas.innerHTML = htmlMascotas;
-    Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) =>
-        botonEditar.onclick = editar(index))
-    Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) =>
-        botonEliminar.onclick = eliminar(index))
+            listaMascotas.innerHTML = htmlMascotas;
+            Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) =>
+                botonEditar.onclick = editar(index))
+            Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) =>
+                botonEliminar.onclick = eliminar(index))
+
+            return;
+        }
+
+
+        listaMascotas.innerHTML = `  <tr>
+    <td colspan="5">No hay mascotas</td>
+    </tr>`;
+    } catch (error) {
+        throw error;
+    }
+
+
+    // la funcion map recorre el arreglo y ejecuta el callback
+    // funcion join para evitar que los elementos hmtl se junten
+
 }
 
 async function enviarDatos(evento) {
