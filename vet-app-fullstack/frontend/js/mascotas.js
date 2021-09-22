@@ -11,7 +11,8 @@ const url = "http://localhost:8000/mascotas";
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
-const alerta = document.getElementsByClassName("alert");
+const alertaBtn = document.getElementById("alert-btn");
+const alertMessage = document.getElementById("AlertMessage");
 let mascotas = [
     {
         tipo: "Gato",
@@ -60,7 +61,8 @@ async function listarMascotas() {
     <td colspan="5">No hay mascotas</td>
     </tr>`;
     } catch (error) {
-       alerta.show();
+        CrearMensaje('error', 'danger')
+          
     }
 
 
@@ -108,7 +110,11 @@ async function enviarDatos(evento) {
             resetModal();
         }
     } catch (error) {
-        alerta.show();
+        if (alertaBtn) {
+            alertaBtn.addEventListener('click', function () {
+              CrearMensaje(String(error), 'danger')
+            })
+          }
     }
 
 
@@ -147,12 +153,19 @@ function eliminar(indice) {
                 resetModal();
             }
         } catch (error) {
-            alerta.show();
+            CrearMensaje(String(error), 'danger')
         }
 
     }
 
 }
+
+function CrearMensaje(message, type) {
+    var wrapper = document.createElement('div')
+    wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+  
+    alertMessage.append(wrapper)
+  }
 
 function resetModal() {
     nombre.value = "";
