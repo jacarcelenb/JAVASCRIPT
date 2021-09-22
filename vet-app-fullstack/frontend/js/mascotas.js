@@ -25,7 +25,7 @@ async function listarMascotas() {
     try {
         const respuesta = await fetch(url);
         const mascotasServidor = await respuesta.json();
-        if (Array.isArray(mascotasServidor) && mascotasServidor.length > 0) {
+        if (Array.isArray(mascotasServidor)) {
             mascotas = mascotasServidor;
         }
     } catch (error) {
@@ -121,9 +121,24 @@ function editar(id) {
 }
 
 function eliminar(indice) {
-    return function clickEliminar() {
-        mascotas = mascotas.filter((mascota, indicemascota) => indicemascota !== indice);
-        listarMascotas();
+    const urlEnvio = `${url}/${indice}`;
+    return async function clickEliminar() {
+        try {
+            const respuesta = await fetch(urlEnvio, {
+                method: "DELETE",
+
+            })
+            if (respuesta.ok) {
+                listarMascotas();
+                resetModal();
+
+            } else {
+                resetModal();
+            }
+        } catch (error) {
+            throw error;
+        }
+
     }
 
 }
