@@ -61,7 +61,7 @@ async function listarMascotas() {
     <td colspan="5">No hay mascotas</td>
     </tr>`;
     } catch (error) {
-        CrearMensaje('error', 'danger')
+        $("alert").show();
           
     }
 
@@ -110,11 +110,7 @@ async function enviarDatos(evento) {
             resetModal();
         }
     } catch (error) {
-        if (alertaBtn) {
-            alertaBtn.addEventListener('click', function () {
-              CrearMensaje(String(error), 'danger')
-            })
-          }
+        $("alert").show();
     }
 
 
@@ -153,7 +149,7 @@ function eliminar(indice) {
                 resetModal();
             }
         } catch (error) {
-            CrearMensaje(String(error), 'danger')
+          $("alert").show();
         }
 
     }
@@ -161,7 +157,7 @@ function eliminar(indice) {
 }
 
 function CrearMensaje(message, type) {
-    var wrapper = document.createElement('div')
+    const wrapper = document.createElement('div')
     wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
   
     alertMessage.append(wrapper)
