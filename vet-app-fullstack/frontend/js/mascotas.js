@@ -80,7 +80,7 @@ async function enviarDatos(evento) {
             urlEnvio = `${url}/${indiceEditar.value}`
         }
 
-        const respuesta = await fetch(url, {
+        const respuesta = await fetch(urlEnvio, {
             method, // or 'PUT'
             headers: {
                 'Content-Type': 'application/json',
