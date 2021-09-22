@@ -11,7 +11,7 @@ const url = "http://localhost:8000/mascotas";
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
-
+const alerta = document.getElementsByClassName("alert");
 let mascotas = [
     {
         tipo: "Gato",
@@ -60,7 +60,7 @@ async function listarMascotas() {
     <td colspan="5">No hay mascotas</td>
     </tr>`;
     } catch (error) {
-        throw error;
+       alerta.show();
     }
 
 
@@ -108,7 +108,7 @@ async function enviarDatos(evento) {
             resetModal();
         }
     } catch (error) {
-        throw error;
+        alerta.show();
     }
 
 
@@ -147,7 +147,7 @@ function eliminar(indice) {
                 resetModal();
             }
         } catch (error) {
-            throw error;
+            alerta.show();
         }
 
     }
