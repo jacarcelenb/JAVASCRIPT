@@ -8,29 +8,27 @@ const btnGuardar = document.getElementById('btn-guardar');
 const btnCerrar = document.getElementById('btn-closemodal');
 const btnCancelar = document.getElementById('btn-cancelar');
 const indiceEditar = document.getElementById('indice');
+const url = "http://localhost:8000/veterinarios";
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
 
-let veterinarios = [
-    {
-        nombre: "Margaret",
-        apellido: "Diaz",
-        identificacion: "100450018-7",
-        pais: "Japon"
-    }
-]
+let veterinarios = []
 
-function listarVeterinarios() {
-    // la funcion map recorre el arreglo y ejecuta el callback
-    // funcion join para evitar que los elementos hmtl se junten
-    let htmlVeterinarios = veterinarios.map((veterinario, indice) => `
+async function listarVeterinarios() {
+    try {
+        const respuesta = await fetch(url);
+        const VeterinariosServidor = await respuesta.json();
+        if (Array.isArray(VeterinariosServidor)) {
+            veterinarios = VeterinariosServidor;
+        }
+        if (veterinarios.length > 0) {
+            let htmlVeterinarios = veterinarios.map((veterinario, indice) => `
     <tr>
     <th scope="row">${indice}</th>
-    <td>${veterinario.identificacion}</td>
+    <td>${veterinario.documento}</td>
     <td>${veterinario.nombre}</td>
     <td>${veterinario.apellido}</td>
-    <td>${veterinario.pais}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-warning editar"><i class="fa fa-bars"
@@ -41,12 +39,22 @@ function listarVeterinarios() {
         </div>
     </td>
 </tr>`).join("");
-    listaVeterinarios.innerHTML = htmlVeterinarios;
-    Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) =>
-        botonEditar.onclick = editar(index))
-    Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) =>
-        botonEliminar.onclick = eliminar(index))
+            listaVeterinarios.innerHTML = htmlVeterinarios;
+            Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) =>
+                botonEditar.onclick = editar(index))
+            Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) =>
+                botonEliminar.onclick = eliminar(index))
+
+            return;
+        }
+        listaVeterinarios.innerHTML = `  <tr>
+    <td colspan="5">No hay veterinarios</td>
+    </tr>`;
+    } catch (error) {
+        throw error;
+    }
 }
+
 
 function enviarDatos(evento) {
     evento.preventDefault();
