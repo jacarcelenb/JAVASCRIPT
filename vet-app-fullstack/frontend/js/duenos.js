@@ -12,6 +12,10 @@ var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
 
+var toastLiveExample = document.getElementById('liveToast')
+
+var toast = new bootstrap.Toast(toastLiveExample)
+
 let duenos = [
     {
         nombre: "James",

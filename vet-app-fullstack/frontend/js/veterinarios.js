@@ -13,6 +13,10 @@ var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
 
+var toastLiveExample = document.getElementById('liveToast')
+
+var toast = new bootstrap.Toast(toastLiveExample)
+
 let veterinarios = []
 
 async function listarVeterinarios() {
@@ -51,7 +55,7 @@ async function listarVeterinarios() {
     <td colspan="5">No hay veterinarios</td>
     </tr>`;
     } catch (error) {
-        throw error;
+        toast.show()
     }
 }
 
@@ -94,7 +98,7 @@ async function enviarDatos(evento) {
         }
 
     } catch (error) {
-        throw error;
+        toast.show()
     }
 
 
@@ -128,7 +132,7 @@ function eliminar(indice) {
             } 
         } catch (error) {
             console.log({error})
-            throw error;
+            toast.show()
         }
     }
 
