@@ -12,7 +12,7 @@ module.exports = {
   mascotas: mascotas(recursos.mascotas),
   veterinarios: veterinarios(recursos.veterinarios),
   propietarios: propietarios(recursos.propietarios),
-  consultas: consultas(recursos.consultas),
+  consultas: consultas(recursos),
   noEncontrado: (data, callback) => {
     callback(404, { mensaje: "no encontrado" });
   }

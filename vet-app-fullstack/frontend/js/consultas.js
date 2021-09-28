@@ -23,15 +23,15 @@ async function listarConsultas (){
             const htmlConsultas = consultas.map((consulta, indice) =>
             ` <tr>
             <th scope="row">${indice}</th>
-            <td>${consulta.mascota}</td>
-            <td>${consulta.veterinaria}</td>
+            <td>${consulta.mascota.nombre}</td>
+            <td>${consulta.veterinario.nombre} ${consulta.veterinario.apellido}</td>
+            <td>${consulta.diagnostico}</td>
             <td>${consulta.fechaCreacion}</td>
             <td>${consulta.fechaEdicion}</td>
-            <td>${consulta.mascota}</td>
            
             <td>
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" class="btn btn-warning">Editar</button>
+                    <button type="button" class="btn btn-danger">Editar</button>
                     
                 </div>
             </td>

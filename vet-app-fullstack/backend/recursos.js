@@ -20,7 +20,7 @@ module.exports = {
     ],
 
     consultas: [
-       {mascota: 0 , veterinario: 0 , fechaCreacion: new Date() , fechaEdicion: new Date(),historia: "" , diagnostico: ""}, 
+       {mascota: 0 , veterinario: 0 , diagnostico: "Enfermedad",fechaCreacion: new Date() , fechaEdicion: new Date()}, 
     ]
 
 }
