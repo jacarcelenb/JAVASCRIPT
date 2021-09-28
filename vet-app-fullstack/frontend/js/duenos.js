@@ -63,34 +63,46 @@ async function listarDuenos() {
 
 }
 
-function enviarDatos(evento) {
+ async function enviarDatos(evento) {
     evento.preventDefault();
+    try {
+        
+        const accion = btnGuardar.innerHTML;
+        const datos = {
+            documento: documento.value,
+            nombre: nombre.value,
+            apellido: apellido.value,
+    
+        };
+        let urlEnvio = url;
+        let method= "POST";
+    
+        if (accion == 'Editar') {
+            urlEnvio += `/${indiceEditar.value}`;
+            method = "PUT";  
+        }
+        const respuesta = await fetch(urlEnvio, {
+            method, // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos),
+        })
 
-    const accion = btnGuardar.innerHTML;
-    const datos = {
-        documento: documento.value,
-        nombre: nombre.value,
-        apellido: apellido.value,
 
-    };
-
-    switch (accion) {
-        case 'Editar':
-            // editar 
-            duenos[indiceEditar.value] = datos;
-            console.log("entro en switch")
+        if (respuesta.ok) {
+            listarDuenos();
             resetModal();
-            break;
 
-        default:
-            // crear
-            duenos.push(datos);
-            break;
+        } else {
+            resetModal();
+        }
+    
+    } catch (error) {
+        
     }
-    listarDuenos();
-    resetModal();
-
-
+ 
+  
 }
 // patron closure
 function editar(id) {
