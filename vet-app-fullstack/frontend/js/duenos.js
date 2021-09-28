@@ -120,9 +120,20 @@ function editar(id) {
 }
 
 function eliminar(indice) {
-    return function clickEliminar() {
-        duenos = duenos.filter((dueno, indicedueno) => indicedueno !== indice);
-        listarDuenos();
+    const urlEnvio = `${url}/${indice}`;
+    let method = "DELETE";
+    return async function clickEliminar() {
+        try {
+            const respuesta = await fetch(urlEnvio, {
+                method, 
+            })
+            if (respuesta.ok) {
+                listarDuenos();
+            } 
+        } catch (error) {
+            console.log({error})
+            toast.show()
+        }
     }
 
 }
