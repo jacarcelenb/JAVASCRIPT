@@ -1,13 +1,13 @@
 const listaDuenos = document.getElementById("lista-duenos");
 const nombre = document.getElementById("nombre");
 const apellido = document.getElementById("apellido");
-const pais = document.getElementById("pais");
-const identificacion = document.getElementById("identificacion");
+const documento = document.getElementById("documento");
 const form = document.getElementById("form");
 const btnGuardar = document.getElementById('btn-guardar');
 const btnCerrar = document.getElementById('btn-closemodal');
 const btnCancelar = document.getElementById('btn-cancelar');
 const indiceEditar = document.getElementById('indice');
+const url = "http://localhost:8000/propietarios";
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
@@ -16,25 +16,26 @@ var toastLiveExample = document.getElementById('liveToast')
 
 var toast = new bootstrap.Toast(toastLiveExample)
 
-let duenos = [
-    {
-        nombre: "James",
-        apellido: "Carter",
-        identificacion: "100454448-7",
-        pais: "Japon"
-    }
-]
+let duenos = []
 
-function listarDuenos() {
-    // la funcion map recorre el arreglo y ejecuta el callback
-    // funcion join para evitar que los elementos hmtl se junten
-    let htmlDuenos = duenos.map((dueno, indice) => `
+async function listarDuenos() {
+    try {
+        // la funcion map recorre el arreglo y ejecuta el callback
+        // funcion join para evitar que los elementos hmtl se junten
+        const respuesta = await fetch(url);
+        const DuenosServidor = await respuesta.json();
+
+        if (Array.isArray(DuenosServidor)) {
+            duenos = DuenosServidor;
+        }
+
+        if (duenos.length > 0) {
+            let htmlDuenos = duenos.map((dueno, indice) => `
     <tr>
     <th scope="row">${indice}</th>
-    <td>${dueno.identificacion}</td>
+    <td>${dueno.documento}</td>
     <td>${dueno.nombre}</td>
     <td>${dueno.apellido}</td>
-    <td>${dueno.pais}</td>
     <td>
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-warning editar"><i class="fa fa-bars"
@@ -45,11 +46,21 @@ function listarDuenos() {
         </div>
     </td>
 </tr>`).join("");
-    listaDuenos.innerHTML = htmlDuenos;
-    Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) =>
-        botonEditar.onclick = editar(index))
-    Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) =>
-        botonEliminar.onclick = eliminar(index))
+            listaDuenos.innerHTML = htmlDuenos;
+            Array.from(document.getElementsByClassName('editar')).forEach((botonEditar, index) =>
+                botonEditar.onclick = editar(index))
+            Array.from(document.getElementsByClassName('eliminar')).forEach((botonEliminar, index) =>
+                botonEliminar.onclick = eliminar(index))
+
+            return;
+        }
+        listaDuenos.innerHTML = `  <tr>
+    <td colspan="5">No hay dueños</td>
+    </tr>`;
+    } catch (error) {
+        toast.show()
+    }
+
 }
 
 function enviarDatos(evento) {
@@ -57,10 +68,9 @@ function enviarDatos(evento) {
 
     const accion = btnGuardar.innerHTML;
     const datos = {
-        identificacion: identificacion.value,
+        documento: documento.value,
         nombre: nombre.value,
         apellido: apellido.value,
-        pais: pais.value
 
     };
 
@@ -89,10 +99,9 @@ function editar(id) {
         btnGuardar.innerHTML = 'Editar';
         myModal.show();
         const dueno = duenos[id];
-        identificacion.value = dueno.identificacion;
+        documento.value = dueno.documento;
         nombre.value = dueno.nombre;
         apellido.value = dueno.apellido;
-        pais.value = dueno.pais;
         indiceEditar.value = id;
     }
 
@@ -107,10 +116,9 @@ function eliminar(indice) {
 }
 
 function resetModal() {
-    identificacion.value = "";
+    documento.value = "";
     nombre.value = "";
     apellido.value = "";
-    pais.value = "";
     indiceEditar.value = "";
     btnGuardar.innerText = 'Crear';
 }
