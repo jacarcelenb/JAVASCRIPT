@@ -1,9 +1,11 @@
 const listaConsultas = document.getElementById("lista-consultas");
 const url = "http://localhost:8000";
 const listaMascotas = document.getElementById("mascotas");
+const listaVeterinarios = document.getElementById("veterinarios");
 
 let consultas = [];
 let mascotas = [];
+let veterinarios = [];
 async function listarConsultas (){
     /*
      consultas: [
@@ -72,5 +74,28 @@ async function listarMascotas (){
     }
 }
 
+
+async function listarVeterinarios (){
+    try {
+        const entidad = "veterinarios";
+        const respuesta = await fetch(`${url}/${entidad}`);
+        const veterinariosServer = await respuesta.json();
+        if (Array.isArray(veterinariosServer)) {
+            veterinarios = veterinariosServer;
+        }
+        if (respuesta.ok) {
+            const htmlveterinarios = veterinarios.map((veterinario, indice) =>
+            ` <option value=${indice}>${veterinario.nombre} ${veterinario.apellido}</option>`).join("");
+            
+            listaVeterinarios.innerHTML += htmlveterinarios;
+            
+        }
+       
+    } catch (error) {
+        throw error;
+    }
+}
+
 listarConsultas();
 listarMascotas();
+listarVeterinarios();
