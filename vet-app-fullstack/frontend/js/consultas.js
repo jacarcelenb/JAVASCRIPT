@@ -1,7 +1,9 @@
 const listaConsultas = document.getElementById("lista-consultas");
-const url = "http://localhost:8000/consultas";
+const url = "http://localhost:8000";
+const listaMascotas = document.getElementById("mascotas");
 
 let consultas = [];
+let mascotas = [];
 async function listarConsultas (){
     /*
      consultas: [
@@ -14,7 +16,8 @@ async function listarConsultas (){
     ]
      */
     try {
-        const respuesta = await fetch(url);
+        const entidad = "consultas";
+        const respuesta = await fetch(`${url}/${entidad}`);
         const consultasServer = await respuesta.json();
         if (Array.isArray(consultasServer)) {
             consultas = consultasServer;
@@ -47,4 +50,27 @@ async function listarConsultas (){
     }
 }
 
+
+async function listarMascotas (){
+    try {
+        const entidad = "mascotas";
+        const respuesta = await fetch(`${url}/${entidad}`);
+        const MascotasServer = await respuesta.json();
+        if (Array.isArray(MascotasServer)) {
+            mascotas = MascotasServer;
+        }
+        if (respuesta.ok) {
+            const htmlMascotas = mascotas.map((mascota, indice) =>
+            ` <option value=${indice}>${mascota.nombre}</option>`).join("");
+            
+            listaMascotas.innerHTML += htmlMascotas;
+            
+        }
+       
+    } catch (error) {
+        throw error;
+    }
+}
+
 listarConsultas();
+listarMascotas();
