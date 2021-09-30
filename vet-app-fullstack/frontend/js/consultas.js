@@ -96,6 +96,19 @@ async function listarVeterinarios (){
     }
 }
 
+function editar(id) {
+
+    return function handler() {
+        btnGuardar.innerHTML = 'Editar';
+        myModal.show();
+        const dueno = duenos[id];
+        documento.value = dueno.documento;
+        nombre.value = dueno.nombre;
+        apellido.value = dueno.apellido;
+        indiceEditar.value = id;
+    }
+
+}
 listarConsultas();
 listarMascotas();
 listarVeterinarios();
