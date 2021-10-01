@@ -5,7 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="estilos.css">
+
+    <link rel="stylesheet" href="../css/estilos.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
@@ -79,6 +80,7 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <input type="hidden" id="indice">
                     
                         <div class="col">
                             <select  class="form-control" id="mascotas" aria-label="Default select example">
@@ -112,7 +114,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button type="button" id="btn-guardar"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
         </div>
