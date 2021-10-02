@@ -5,13 +5,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="../css/estilos.css">
     <!-- Bootstrap CSS -->
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 </head>
@@ -29,16 +27,16 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./index.html">Mascotas</a>
+                            <a class="nav-link active" aria-current="page" href="/index.html">Mascotas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./veterinarios.html">Veterinarios</a>
+                            <a class="nav-link" href="/veterinarios.html">Veterinarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./consultas.html">Consultas</a>
+                            <a class="nav-link" href="/consultas.html">Consultas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./duenos.html">Dueños</a>
+                            <a class="nav-link" href="/duenos.html">Dueños</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -48,36 +46,27 @@
                 </div>
             </div>
         </nav>
-
         <div class="actions-menu">
-            <h1>Dueños</h1>
+            <h1>Consultas</h1>
+            <br/>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#exampleModal">Nuevo</button>
-
-                <div class="actions-menu-content">
-                    <div  id="liveToast"  class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="d-flex">
-                          <div class="toast-body">
-                            Error con el servidor.
-                          </div>
-                          <button type="button" class="btn-close btn-close-white me-5 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                      </div>
-        
-                </div>
         </div>
+        <br/>
         <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Documento</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
+                    <th scope="col">Mascotas</th>
+                    <th scope="col">Veterinarios</th>
+                    <th scope="col">Diagnostico</th>
+                    <th scope="col">Fecha Creacion</th>
+                    <th scope="col">Fecha Edicion</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody id="lista-duenos">
-              
+            <tbody id="lista-consultas">
+               
             </tbody>
         </table>
     </div>
@@ -86,35 +75,46 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Dueño</h5>
-                    <button id="btn-closemodal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Nueva Mascota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form">
+                    <form>
                         <input type="hidden" id="indice">
+                    
                         <div class="col">
-                            <label for="exampleInputEmail1" class="form-label">documento</label>
-                            <input type="text" class="form-control" id="documento">
-
+                            <select  class="form-control" id="mascotas" aria-label="Default select example">
+                                <option selected>Seleccione la mascota</option>
+                            </select>
                         </div>
                         <br />
                         <div class="col">
-                            <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre">
-
+                            <select  class="form-control" id="veterinarios" aria-label="Default select example">
+                                <option selected>Seleccione el veterinario</option>
+                            </select>
                         </div>
                         <br />
                         <div class="col">
-                            <label for="exampleInputEmail1" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="apellido">
-
+                            <textarea id="historia" class="form-control" placeholder="Historia">
+                            </textarea>
+                        </div>
+                        <br />
+                        <div class="col">
+                            <select  class="form-control" id="diagnostico" aria-label="Default select example">
+                                <option selected>Seleccione el diagnostico</option>
+                                <option>Problemas estomacales</option>
+                                <option>Falta de vision</option>
+                                <option>Problemas de audicion</option>
+                                <option>Infeccion</option>
+                                <option>Lesiones o roturas</option>
+                            </select>
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button  id="btn-cancelar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button id="btn-guardar" type="button"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="btn-guardar"  data-bs-dismiss="modal" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
         </div>
@@ -125,9 +125,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
-
-    <script defer src="../js/duenos.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../js/consultas.js"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
