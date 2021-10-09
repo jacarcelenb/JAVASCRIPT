@@ -1,5 +1,5 @@
 const listaConsultas = document.getElementById("lista-consultas");
-const url = "http://localhost:8000";
+const url = "https://veterianaria-backend.vercel.app";
 const listaMascotas = document.getElementById("mascotas");
 const listaVeterinarios = document.getElementById("veterinarios");
 const btnGuardar = document.getElementById('btn-guardar');

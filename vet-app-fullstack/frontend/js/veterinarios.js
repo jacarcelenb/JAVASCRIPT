@@ -8,7 +8,7 @@ const btnGuardar = document.getElementById('btn-guardar');
 const btnCerrar = document.getElementById('btn-closemodal');
 const btnCancelar = document.getElementById('btn-cancelar');
 const indiceEditar = document.getElementById('indice');
-const url = "http://localhost:8000/veterinarios";
+const url = "https://veterianaria-backend.vercel.app/veterinarios";
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
 })
