@@ -1,10 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-import Mascotas from './MASCOTAS';
+
+import Pagina from './pagina';
 
 function App() {
   return (
-   <Mascotas/>
+   <Pagina/>
   );
 }
 
