@@ -136,4 +136,4 @@ function Mascotas() {
 
 // exportar el componenete de REACT
 
-
+export  default Mascotas;
