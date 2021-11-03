@@ -6,7 +6,7 @@ function Alert() {
        
 
 
-                <div id="liveToast" className="toast align-items-center text-white bg-danger border-0" role="alert"
+                <div id="liveToast" className="toast align-items-center text-white bg-danger border-0 alert" role="alert"
                     aria-live="assertive" aria-atomic="true">
                     <div className="d-flex">
                         <div className="toast-body">
