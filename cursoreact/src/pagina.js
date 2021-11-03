@@ -1,6 +1,6 @@
 import React from 'react';
 import ActionMenu from './componentes/ActionsMenu';
-import Navbar from './componentes/navbar/index.';
+import Navbar from './componentes/navbar';
 import Tabla from './componentes/Tabla';
 
 function Mascotas() {
