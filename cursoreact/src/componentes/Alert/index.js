@@ -3,23 +3,20 @@ import "./Alert.css"
 
 function Alert(props) {
     return (
-       
+        <div className="alert alert-danger alert-dismissible" role="alert">
+            <strong>Error</strong> con el servidor.
+            <button
+                type="button"
+                className="close"
+                data-dismiss="alert"
+                aria-label="Close"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
 
-                <div id="liveToast" className="toast align-items-center text-white bg-danger border-0 alert" role="alert"
-                    aria-live="assertive" aria-atomic="true">
-                    <div className="d-flex">
-                        <div className="toast-body">
-                            Error con el servidor.
-                        </div>
-                        <button type="button" className="btn-close btn-close-white me-5 m-auto" data-bs-dismiss="toast"
-                            aria-label="Close"
-                            onClick={props.alertSwitch}></button>
-                    </div>
-                </div>
 
-        
-    
     )
 }
 
