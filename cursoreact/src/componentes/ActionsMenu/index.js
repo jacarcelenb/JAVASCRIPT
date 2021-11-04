@@ -5,6 +5,7 @@ import Alert from "../Alert"
 
 function ActionMenu() {
     const [mostrarAlerta , setMostrarAlerta] = useState(false);
+    const alertSwitch = () =>setMostrarAlerta(!mostrarAlerta)
     return (
         <div className="actions-menu">
             <h1>Mascotas</h1>
@@ -14,12 +15,12 @@ function ActionMenu() {
                 className="btn btn-primary" 
                 data-bs-toggle="modal" 
                 data-bs-target="#exampleModal"
-                onClick={()=> setMostrarAlerta(!mostrarAlerta)}>
+                onClick={alertSwitch}>
                     Nueva
                 </button>
 
             </div>
-            {mostrarAlerta && <Alert/>}
+            {mostrarAlerta && <Alert alertSwitch={alertSwitch}/>}
         </div>
 
     )
