@@ -7,7 +7,7 @@ function Encabezado(props) {
     }
 
     return (
-        <thead className="table-dark">
+        <thead className="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 {props.columnas.map((columna)=>

@@ -1,4 +1,5 @@
 import React from "react";
+import BotonAccion from "../BotonAction";
 
 function Fila({mascota , indice}){
     return(
@@ -9,11 +10,9 @@ function Fila({mascota , indice}){
         <td>{mascota.propietario}</td>
         <td>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                <button type="button" class="btn btn-warning editar"><i class="fa fa-bars"
-                    aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-danger eliminar"><i class="fa fa-window-close-o"
-                    aria-hidden="true"></i></button>
-
+                
+              <BotonAccion tipo="editar"/>
+              <BotonAccion tipo="eliminar"/>
             </div>
         </td>
     </tr>
