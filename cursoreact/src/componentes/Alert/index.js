@@ -1,7 +1,7 @@
 import React from "react"
 import "./Alert.css"
 
-function Alert(props) {
+function Alert({alertSwitch = () => {}}) {
     return (
         <div className="alert alert-danger alert-dismissible" role="alert">
             <strong>Error</strong> con el servidor.
@@ -10,6 +10,7 @@ function Alert(props) {
                 className="close"
                 data-dismiss="alert"
                 aria-label="Close"
+                onClick={alertSwitch}
             >
                 <span aria-hidden="true">&times;</span>
             </button>
