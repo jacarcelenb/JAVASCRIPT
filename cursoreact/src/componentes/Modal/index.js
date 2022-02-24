@@ -1,10 +1,14 @@
 import React from "react";
 import ModalHeader from "./ModalHeader";
 import Select from "../Select";
+import "./Modal.css"
 
 
 function Modal() {
-    return (<div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    return (
+    <>
+    <div className="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
             <div className="modal-content">
                 <ModalHeader></ModalHeader>
@@ -46,7 +50,9 @@ function Modal() {
 
             </div>
         </div>
-    </div>);
+    </div>
+     <div className="modal-backdrop fade show"></div>
+    </>);
 }
 
 export default Modal;
