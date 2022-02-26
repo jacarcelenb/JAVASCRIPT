@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ActionMenu from './componentes/ActionsMenu';
 import Navbar from './componentes/navbar';
 import Tabla from './componentes/Tabla/index';
-import Modal from './componentes/Modal';
+import Modal from './componentes/Modal/index';
 
 class Pagina extends Component {
     constructor(props){
@@ -21,11 +21,12 @@ class Pagina extends Component {
     render() {
         return (
             <div className="container">
-
                 <Navbar />
+                { this.state.mostrarModal && <Modal />}
+
                 <ActionMenu  cambiarModal = {this.cambiarModal}/>
                 <Tabla />
-               { this.state.mostrarModal && <Modal />}
+              
 
             </div>);
     }

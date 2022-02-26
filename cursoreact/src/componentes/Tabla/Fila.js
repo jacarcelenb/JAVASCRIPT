@@ -9,7 +9,7 @@ function Fila({mascota , indice}){
         <td>{mascota.nombre}</td>
         <td>{mascota.propietario}</td>
         <td>
-            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <div className="btn-group" role="group" aria-label="Basic mixed styles example">
                 
               <BotonAccion tipo="editar"/>
               <BotonAccion tipo="eliminar"/>
