@@ -3,6 +3,18 @@ import ModalHeader from "./ModalHeader";
 import Select from "../Select";
 import "./Modal.css"
 
+const tiposMascota = [{valor: "Tipo animal" ,
+etiqueta: "Tipo animal"},
+{valor: "Perro" , etiqueta: "Perro"}
+,{valor: "Gato" , etiqueta: "Gato"},
+{valor: "Pajaro" , etiqueta: "Pajaro"},
+{valor: "Otro" , etiqueta: "Otro"}]
+
+const duenos =[
+    {valor: "Esteban" , etiqueta: "Esteba"}
+    ,{valor: "Gabriela" , etiqueta: "Gabriela"},
+    {valor: "Pamela" , etiqueta: "Pamela"},
+    {valor: "Otto" , etiqueta: "Otto"}]
 
 function Modal() {
 
@@ -16,12 +28,7 @@ function Modal() {
                             <form id="form">
                                 <div className="form-row">
                                     <div className="col">
-                                        <Select options={[{valor: "Tipo animal" ,
-                                        etiqueta: "Tipo animal"},
-                                        {valor: "Perro" , etiqueta: "Perro"}
-                                        ,{valor: "Gato" , etiqueta: "Gato"},
-                                        {valor: "Pajaro" , etiqueta: "Pajaro"},
-                                        {valor: "Otro" , etiqueta: "Otro"}]} />
+                                        <Select options={tiposMascota} />
                                     </div>
                                 </div>
                                 <div className="form-row">
@@ -33,16 +40,7 @@ function Modal() {
                                     </div>
                                 </div>
                                 <div className="col">
-                                    <select className="form-control" id="propietario" aria-label="Default select example">
-                                        <option>Propietario</option>
-                                        <option>Esteban</option>
-                                        <option>Gabriela</option>
-                                        <option>Pamela</option>
-                                        <option>Otto</option>
-                                        <option>Jorge</option>
-                                        <option>Camilo</option>
-
-                                    </select>
+                                    <Select options={duenos} nombreCampo="dueño" />
 
                                 </div>
 
