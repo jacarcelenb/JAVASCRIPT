@@ -3,18 +3,20 @@ import ModalHeader from "./ModalHeader";
 import Select from "../Select";
 import "./Modal.css"
 
-const tiposMascota = [{valor: "Tipo animal" ,
-etiqueta: "Tipo animal"},
-{valor: "Perro" , etiqueta: "Perro"}
-,{valor: "Gato" , etiqueta: "Gato"},
-{valor: "Pajaro" , etiqueta: "Pajaro"},
-{valor: "Otro" , etiqueta: "Otro"}]
+const tiposMascota = [{
+    valor: "Tipo animal",
+    etiqueta: "Tipo animal"
+},
+{ valor: "Perro", etiqueta: "Perro" }
+    , { valor: "Gato", etiqueta: "Gato" },
+{ valor: "Pajaro", etiqueta: "Pajaro" },
+{ valor: "Otro", etiqueta: "Otro" }]
 
-const duenos =[
-    {valor: "Esteban" , etiqueta: "Esteba"}
-    ,{valor: "Gabriela" , etiqueta: "Gabriela"},
-    {valor: "Pamela" , etiqueta: "Pamela"},
-    {valor: "Otto" , etiqueta: "Otto"}]
+const duenos = [
+    { valor: "Esteban", etiqueta: "Esteba" }
+    , { valor: "Gabriela", etiqueta: "Gabriela" },
+    { valor: "Pamela", etiqueta: "Pamela" },
+    { valor: "Otto", etiqueta: "Otto" }]
 
 function Modal() {
 
@@ -28,7 +30,7 @@ function Modal() {
                             <form id="form">
                                 <div className="form-row">
                                     <div className="col">
-                                        <Select options={tiposMascota} nombreCampo="tiposMascota" />
+                                        <Select options={tiposMascota} nombreCampo="tipo de mascota" />
                                     </div>
                                 </div>
                                 <div className="form-row">
@@ -38,11 +40,12 @@ function Modal() {
                                             id="nombre" />
 
                                     </div>
-                                </div>
-                                <div className="col">
-                                    <Select options={duenos} nombreCampo="dueño" />
+                                    <div className="col">
+                                        <Select options={duenos} nombreCampo="dueño" />
 
+                                    </div>
                                 </div>
+
 
                             </form>
 
