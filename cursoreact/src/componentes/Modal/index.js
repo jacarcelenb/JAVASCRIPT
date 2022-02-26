@@ -28,7 +28,7 @@ function Modal() {
                             <form id="form">
                                 <div className="form-row">
                                     <div className="col">
-                                        <Select options={tiposMascota} />
+                                        <Select options={tiposMascota} nombreCampo="tiposMascota" />
                                     </div>
                                 </div>
                                 <div className="form-row">
