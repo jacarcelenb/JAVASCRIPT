@@ -16,7 +16,12 @@ function Modal() {
                             <form id="form">
                                 <div className="form-row">
                                     <div className="col">
-                                        <Select />
+                                        <Select options={[{valor: "Tipo animal" ,
+                                        etiqueta: "Tipo animal"},
+                                        {valor: "Perro" , etiqueta: "Perro"}
+                                        ,{valor: "Gato" , etiqueta: "Gato"},
+                                        {valor: "Pajaro" , etiqueta: "Pajaro"},
+                                        {valor: "Otro" , etiqueta: "Otro"}]} />
                                     </div>
                                 </div>
                                 <div className="form-row">
