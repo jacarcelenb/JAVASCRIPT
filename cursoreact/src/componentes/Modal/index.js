@@ -8,12 +8,12 @@ function Modal() {
 
     return (
     <>
-    <div className="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
+    <div className="modal">
+        <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
                 <ModalHeader></ModalHeader>
                 <div className="modal-body">
-                    <form id="form">
+                    <form id="form-row">
                         <div className="col">
                             <label for="exampleInputEmail1" className="form-label">Nombre</label>
                             <input type="text" className="form-control" id="nombre" />
