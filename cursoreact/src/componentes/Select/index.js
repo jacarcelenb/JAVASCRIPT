@@ -1,7 +1,8 @@
 import React from "react";
+import "./Select.css"
 
 function Select (){
-    <select className="form-control" id="tipoanimal" aria-label="Default select example">
+    <select className="form-control">
         <option>Tipo de animal</option>
         <option>Perro</option>
         <option>Gato</option>

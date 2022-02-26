@@ -14,7 +14,11 @@ function Modal() {
                         <ModalHeader />
                         <div className="modal-body">
                             <form id="form">
-                                <Select />
+                                <div className="form-row">
+                                    <div className="col">
+                                        <Select />
+                                    </div>
+                                </div>
                                 <div className="form-row">
                                     <div className="col">
                                         <input type="text"
