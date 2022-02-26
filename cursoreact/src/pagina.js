@@ -22,10 +22,10 @@ class Pagina extends Component {
         return (
             <div className="container">
                 <Navbar />
-                { this.state.mostrarModal && <Modal />}
 
                 <ActionMenu  cambiarModal = {this.cambiarModal}/>
                 <Tabla />
+                { this.state.mostrarModal && <Modal />}
               
 
             </div>);
