@@ -22,7 +22,7 @@ class Pagina extends Component {
     // listar entidades
     Listar = async () =>{
         const {entidad} = this.props
-        const entidades = await ListarEntidad({entidad});
+        const entidades = await ListarEntidad(entidad);
         this.setState({entidades})
     }
 
@@ -40,7 +40,7 @@ class Pagina extends Component {
                 <Navbar />
 
                 <ActionMenu  cambiarModal = {this.cambiarModal} titulo = {titulo}/>
-                <Tabla />
+                <Tabla  entidades = {this.state.entidades}/>
                 { this.state.mostrarModal && <Modal  cambiarModal = {this.cambiarModal} />}
               
 
