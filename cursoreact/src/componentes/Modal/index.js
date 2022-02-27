@@ -3,6 +3,7 @@ import ModalHeader from "./ModalHeader";
 import Select from "../Select";
 import "./Modal.css"
 import Input from "../Input";
+import { ModalFooter } from "./ModalFooter";
 
 const tiposMascota = [{
     valor: "Tipo animal",
@@ -36,7 +37,7 @@ function Modal() {
                                 </div>
                                 <div className="form-row">
                                     <div className="col-md-2">
-                                        <Input tipo="text" nombreCampo="nombre"/>
+                                        <Input tipo="text" nombreCampo="nombre" />
                                     </div>
 
                                     <div className="col-md-2">
@@ -48,13 +49,7 @@ function Modal() {
                             </form>
 
                         </div>
-                        <div className="modal-footer">
-                            <button id="btn-cancelar" type="button" className="btn btn-secondary"
-                                data-bs-dismiss="modal">Cancelar</button>
-                            <button id="btn-guardar" type="button" data-bs-dismiss="modal"
-                                className="btn btn-primary">Guardar</button>
-                        </div>
-
+                        <ModalFooter />
                     </div>
                 </div>
             </div>
