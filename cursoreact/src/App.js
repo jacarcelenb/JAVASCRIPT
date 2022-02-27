@@ -3,7 +3,7 @@ import Pagina from './pagina';
 
 function App() {
   return (
-   <Pagina/>
+   <Pagina titulo = "Mascotas"  entidad="mascotas"/>
   );
 }
 

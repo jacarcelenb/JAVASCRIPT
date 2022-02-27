@@ -19,11 +19,12 @@ class Pagina extends Component {
 
     // metodo render debe ir siempre al final
     render() {
+        const {titulo = "Pagina sin titulo"} = this.props;
         return (
             <div className="container">
                 <Navbar />
 
-                <ActionMenu  cambiarModal = {this.cambiarModal}/>
+                <ActionMenu  cambiarModal = {this.cambiarModal} titulo = {titulo}/>
                 <Tabla />
                 { this.state.mostrarModal && <Modal  cambiarModal = {this.cambiarModal} />}
               

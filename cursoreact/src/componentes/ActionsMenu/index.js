@@ -3,11 +3,11 @@ import "./ActionsMenu.css"
 import Alert from "../Alert"
 
 
-function ActionMenu({cambiarModal = () => {}}) {
+function ActionMenu({cambiarModal = () => {} , titulo}) {
    
     return (
         <div className="actions-menu">
-            <h1>Mascotas</h1>
+            <h1>{titulo}</h1>
             <div className="actions-menu-content">
                 <button 
                 type="button" 
