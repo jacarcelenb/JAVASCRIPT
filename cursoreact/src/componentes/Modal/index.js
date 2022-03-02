@@ -32,17 +32,25 @@ function Modal({cambiarModal = () => {} , manejarInput = () => {}}) {
                             <form id="form">
                                 <div className="form-row">
                                     <div className="col">
-                                        <Select options={tiposMascota} nombreCampo="tipo de mascota" 
+                                        <Select nombreCampo = "tipo"
+                                        options={tiposMascota} 
+                                        placeholder="Tipo Animal" 
                                         onChange={manejarInput}/>
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="col-md-2">
-                                        <Input tipo="text" nombreCampo="nombre" onInput={manejarInput} />
+                                        <Input tipo="text" 
+                                        nombreCampo="nombre" 
+                                        onInput={manejarInput} 
+                                        placeholder= "Nombre"/>
                                     </div>
 
                                     <div className="col-md-2">
-                                        <Select options={duenos} nombreCampo="dueño" />
+                                        <Select options={duenos} 
+                                        nombreCampo="propietario" 
+                                        onChange={manejarInput}
+                                        placeholder= "Dueño"/>
                                     </div>
                                 </div>
 
