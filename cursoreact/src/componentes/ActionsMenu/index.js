@@ -3,7 +3,8 @@ import "./ActionsMenu.css"
 import Alert from "../Alert"
 
 
-function ActionMenu({cambiarModal = () => {} , titulo}) {
+function ActionMenu({cambiarModal = () => {} , titulo ,
+manejarInput = () => {}}) {
    
     return (
         <div className="actions-menu">

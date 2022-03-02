@@ -3,7 +3,7 @@ import ActionMenu from './componentes/ActionsMenu';
 import Navbar from './componentes/navbar';
 import Tabla from './componentes/Tabla/index';
 import Modal from './componentes/Modal/index';
-import {ListarEntidad} from "./servicio";
+import {ListarEntidad , CrearEntidad} from "./servicio";
 
 class Pagina extends Component {
     constructor(props){
@@ -11,6 +11,7 @@ class Pagina extends Component {
         this.state = {
             mostrarModal: false,
             entidades: [],
+            objeto: {},
         };
        
     }
@@ -26,6 +27,13 @@ class Pagina extends Component {
         this.setState({entidades})
     }
 
+    manejarInput = (evento) =>{
+        console.log(evento.persist());
+    }
+    crearEntidad() {
+
+    }
+
     // montar o establecer los valores de la lista en el componente
     // de la pagina despues del renderizado
     componentDidMount (){
@@ -39,9 +47,13 @@ class Pagina extends Component {
             <div className="container">
                 <Navbar />
 
-                <ActionMenu  cambiarModal = {this.cambiarModal} titulo = {titulo}/>
+                <ActionMenu  
+                manejarInput = {this.manejarInput}
+                cambiarModal = {this.cambiarModal} titulo = {titulo}/>
                 <Tabla  entidades = {this.state.entidades}/>
-                { this.state.mostrarModal && <Modal  cambiarModal = {this.cambiarModal} />}
+                { this.state.mostrarModal && <Modal  
+                cambiarModal = {this.cambiarModal} 
+                manejarInput = {this.manejarInput}/>}
               
 
             </div>);

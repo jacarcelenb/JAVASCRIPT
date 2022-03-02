@@ -20,7 +20,7 @@ const duenos = [
     { valor: "Pamela", etiqueta: "Pamela" },
     { valor: "Otto", etiqueta: "Otto" }]
 
-function Modal({cambiarModal = () => {}}) {
+function Modal({cambiarModal = () => {} , manejarInput = () => {}}) {
 
     return (
         <>
@@ -32,12 +32,13 @@ function Modal({cambiarModal = () => {}}) {
                             <form id="form">
                                 <div className="form-row">
                                     <div className="col">
-                                        <Select options={tiposMascota} nombreCampo="tipo de mascota" />
+                                        <Select options={tiposMascota} nombreCampo="tipo de mascota" 
+                                        onChange={manejarInput}/>
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="col-md-2">
-                                        <Input tipo="text" nombreCampo="nombre" />
+                                        <Input tipo="text" nombreCampo="nombre" onInput={manejarInput} />
                                     </div>
 
                                     <div className="col-md-2">
