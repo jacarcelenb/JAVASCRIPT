@@ -36,7 +36,13 @@ class Pagina extends Component {
     this.setState({objeto})
 
     };
-    crearEntidad() {
+    crearEntidad = async () => {
+        const {entidad} = this.props;
+        const {objeto} = this.state;
+        const method = "POST";
+        await CrearEntidad({entidad ,objeto , method})
+        this.cambiarModal();
+        this.Listar();
 
     }
 
@@ -59,7 +65,8 @@ class Pagina extends Component {
                 <Tabla  entidades = {this.state.entidades}/>
                 { this.state.mostrarModal && <Modal  
                 cambiarModal = {this.cambiarModal} 
-                manejarInput = {this.manejarInput}/>}
+                manejarInput = {this.manejarInput}
+                crearEntidad = {this.crearEntidad}/>}
               
 
             </div>);

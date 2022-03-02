@@ -20,7 +20,8 @@ const duenos = [
     { valor: "Pamela", etiqueta: "Pamela" },
     { valor: "Otto", etiqueta: "Otto" }]
 
-function Modal({cambiarModal = () => {} , manejarInput = () => {}}) {
+function Modal({cambiarModal = () => {} , manejarInput = () => {}
+, crearEntidad = () => {}}) {
 
     return (
         <>
@@ -58,7 +59,8 @@ function Modal({cambiarModal = () => {} , manejarInput = () => {}}) {
                             </form>
 
                         </div>
-                        <ModalFooter cambiarModal = {cambiarModal} />
+                        <ModalFooter cambiarModal = {cambiarModal} 
+                        crearEntidad = {crearEntidad}/>
                     </div>
                 </div>
             </div>
