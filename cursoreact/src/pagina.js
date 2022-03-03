@@ -41,13 +41,14 @@ class Pagina extends Component {
         const {objeto} = this.state;
         const method = "POST";
         await CrearEntidad({entidad ,objeto , method})
-        this.cambiarModal();
+        //this.cambiarModal();
         this.Listar();
 
     }
 
     // montar o establecer los valores de la lista en el componente
-    // de la pagina despues del renderizado
+    // de la pagina despues del renderizado // metodo para la incializacion de los componentes
+    // mostrar los datos en el componente de tabla
     componentDidMount (){
         this.Listar();
     }
@@ -60,7 +61,6 @@ class Pagina extends Component {
                 <Navbar />
 
                 <ActionMenu  
-                manejarInput = {this.manejarInput}
                 cambiarModal = {this.cambiarModal} titulo = {titulo}/>
                 <Tabla  entidades = {this.state.entidades}/>
                 { this.state.mostrarModal && <Modal  

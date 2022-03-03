@@ -15,43 +15,43 @@ const tiposMascota = [{
 { valor: "Otro", etiqueta: "Otro" }]
 
 const duenos = [
-    { valor: "Esteban", etiqueta: "Esteba" }
+    { valor: "Esteban", etiqueta: "Esteban" }
     , { valor: "Gabriela", etiqueta: "Gabriela" },
     { valor: "Pamela", etiqueta: "Pamela" },
     { valor: "Otto", etiqueta: "Otto" }]
 
-function Modal({cambiarModal = () => {} , manejarInput = () => {}
-, crearEntidad = () => {}}) {
+function Modal({ cambiarModal = () => { }, manejarInput = () => { }
+    , crearEntidad = () => { } }) {
 
     return (
         <>
             <div className="modal">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
-                        <ModalHeader cambiarModal = {cambiarModal}/>
+                        <ModalHeader cambiarModal={cambiarModal} />
                         <div className="modal-body">
                             <form id="form">
                                 <div className="form-row">
                                     <div className="col">
-                                        <Select nombreCampo = "tipo"
-                                        options={tiposMascota} 
-                                        placeholder="Tipo Animal" 
-                                        onChange={manejarInput}/>
+                                        <Select nombreCampo="tipo"
+                                            options={tiposMascota}
+                                            placeholder="Tipo Animal"
+                                            onChange={manejarInput} />
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="col-md-2">
-                                        <Input tipo="text" 
-                                        nombreCampo="nombre" 
-                                        onInput={manejarInput} 
-                                        placeholder= "Nombre"/>
+                                        <Input tipo="text"
+                                            nombreCampo="nombre"
+                                            onInput={manejarInput}
+                                            placeholder="Nombre" />
                                     </div>
 
                                     <div className="col-md-2">
-                                        <Select options={duenos} 
-                                        nombreCampo="propietario" 
-                                        onChange={manejarInput}
-                                        placeholder= "Dueño"/>
+                                        <Select options={duenos}
+                                            nombreCampo="propietario"
+                                            onChange={manejarInput}
+                                            placeholder="Dueño" />
                                     </div>
                                 </div>
 
@@ -59,8 +59,8 @@ function Modal({cambiarModal = () => {} , manejarInput = () => {}
                             </form>
 
                         </div>
-                        <ModalFooter cambiarModal = {cambiarModal} 
-                        crearEntidad = {crearEntidad}/>
+                        <ModalFooter cambiarModal={cambiarModal}
+                            crearEntidad={crearEntidad} />
                     </div>
                 </div>
             </div>

@@ -3,8 +3,7 @@ import "./ActionsMenu.css"
 import Alert from "../Alert"
 
 
-function ActionMenu({cambiarModal = () => {} , titulo ,
-manejarInput = () => {}}) {
+function ActionMenu({cambiarModal = () => {} , titulo}) {
    
     return (
         <div className="actions-menu">
@@ -13,8 +12,6 @@ manejarInput = () => {}}) {
                 <button 
                 type="button" 
                 className="btn btn-primary" 
-                data-bs-toggle="modal" 
-                data-bs-target="#exampleModal"
                 onClick={cambiarModal}>
                     Nueva
                 </button>
