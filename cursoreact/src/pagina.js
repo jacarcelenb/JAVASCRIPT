@@ -41,7 +41,7 @@ class Pagina extends Component {
         const {objeto} = this.state;
         const method = "POST";
         await CrearEntidad({entidad ,objeto , method})
-        //this.cambiarModal();
+        this.cambiarModal();
         this.Listar();
 
     }

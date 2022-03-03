@@ -1,4 +1,4 @@
-const API_URL = "https://veterianaria-backend-f4zue65sl-jacarcelenb.vercel.app/"
+const API_URL = "https://veterianaria-backend.vercel.app/"
 export const ListarEntidad = async ({entidad = "mascotas"}) =>{
     try {
        const respuesta = await fetch(`${API_URL}/${entidad}`) 

@@ -21,6 +21,8 @@ module.exports = (req, res) => {
     res.setHeader("Access-Control-Request-Methods","OPTIONS ,GET ,PUT , DELETE , POST");
     res.setHeader("Access-Control-Allow-Methods","OPTIONS ,GET ,PUT , DELETE , POST");
     res.setHeader("Access-Control-Allow-Headers","*");
+    res.setHeader("Allow", "GET, POST, OPTIONS, PUT, DELETE");
+
     // dar respuesta inmediata cuando sean options
     if (metodo === "options") {
       res.writeHead(200);
