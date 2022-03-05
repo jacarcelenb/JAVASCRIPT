@@ -3,7 +3,7 @@ import ActionMenu from './componentes/ActionsMenu';
 import Navbar from './componentes/navbar';
 import Tabla from './componentes/Tabla/index';
 import Modal from './componentes/Modal/index';
-import {ListarEntidad , CrearEntidad} from "./servicio";
+import {ListarEntidad , CrearEntidad , EliminarEntidad} from "./servicio";
 
 class Pagina extends Component {
     constructor(props){
@@ -59,6 +59,14 @@ class Pagina extends Component {
 
     }
 
+    eliminarEntidad = async (_evento , index) => {
+        const {entidad} = this.props;
+       const respuesta = await EliminarEntidad({entidad , idObjeto: index});
+       this.Listar();
+
+    
+    }
+
     // montar o establecer los valores de la lista en el componente
     // de la pagina despues del renderizado // metodo para la incializacion de los componentes
     // mostrar los datos en el componente de tabla
@@ -76,7 +84,8 @@ class Pagina extends Component {
                 <ActionMenu  
                 cambiarModal = {this.cambiarModal} titulo = {titulo}/>
                 <Tabla  entidades = {this.state.entidades} 
-                editarEntidad = {this.editarEntidad}/>
+                editarEntidad = {this.editarEntidad}
+                eliminarEntidad = {this.eliminarEntidad}/>
                 { this.state.mostrarModal && <Modal  
                 cambiarModal = {this.cambiarModal} 
                 manejarInput = {this.manejarInput}
