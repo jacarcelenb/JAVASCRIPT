@@ -1,7 +1,8 @@
 import React from "react";
 import BotonAccion from "../BotonAction";
 
-function Fila({entidad, indice} , editarEntidad =() =>{}){
+function Fila({entidad, indice} , editarEntidad =() =>{} ,
+index){
     return(
         <tr>
         <th scope="row">{indice}</th>

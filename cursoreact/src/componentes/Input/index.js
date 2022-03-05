@@ -6,7 +6,7 @@ function Input ({tipo= "text"
 , onInput = () =>{} 
 ,placeholder ,
 value = "" ,
-defaultvalue}){
+defaultvalue = value}){
  return(
     <input type={tipo}
     className="form-control"
