@@ -14,7 +14,7 @@ export const CrearEntidad = async ({
     , idObjeto = null) => {
     try {
         let url = null;
-        if (method === 'PUT' && idObjeto || idObjeto === 0) {
+        if ( (method === 'PUT' && idObjeto) || (idObjeto === 0)) {
             url += `${API_URL}/${entidad}/${idObjeto}`;
 
         } else {

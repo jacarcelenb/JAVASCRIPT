@@ -3,8 +3,7 @@ import "./Select.css"
 
 function Select ({options = [] , nombreCampo = "vacio" , onChange = () =>{} , 
 placeholder,
-value = "",
-defaultvalue = value}){
+value = "" ,}){
 return (
     <select className="form-control" onChange={onChange} 
     name={nombreCampo} placeholder={placeholder}

@@ -1,34 +1,38 @@
 import React from "react";
 import Search from "../Search";
+import { Link } from "react-router-dom"
 import './navbar.css'
 
 function Navbar() {
     return (
-        <nav className="navbar navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">Veterinaria</a>
-            <div className="container-fluid">
-                <div className="collapse navbar-collapse" id="navbarColor02">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="./index.html">Mascotas</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="./veterinarios.html">Veterinarios</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="./consultas.html">Consultas</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="./duenos.html">Dueños</a>
-                        </li>
-
-                        <Search></Search>
-
-                    </ul>
-                    
-                    
-                </div>
-             
+        <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+            <Link className="navbar-brand" to="/">
+                Veterinaria
+            </Link>
+            <div className="navbar-right" id="navbarColor03">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item active">
+                        <Link className="nav-link" to="/">
+                            Mascotas<span className="sr-only"></span>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/veterinarios">
+                            Veterinari@s
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/consultas">
+                            Consultas
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/propietarios">
+                            Dueños
+                        </Link>
+                    </li>
+                </ul>
+                <Search />
             </div>
         </nav>
 

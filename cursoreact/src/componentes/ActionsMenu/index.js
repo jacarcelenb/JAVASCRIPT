@@ -1,6 +1,6 @@
-import React  ,{useState} from "react"
+import React   from "react"
 import "./ActionsMenu.css"
-import Alert from "../Alert"
+
 
 
 function ActionMenu({cambiarModal = () => {} , titulo}) {
