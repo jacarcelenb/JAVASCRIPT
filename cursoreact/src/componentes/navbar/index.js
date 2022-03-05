@@ -22,11 +22,13 @@ function Navbar() {
                             <a className="nav-link" href="./duenos.html">Dueños</a>
                         </li>
 
-                     <Search></Search>
+                        <Search></Search>
 
                     </ul>
                     
+                    
                 </div>
+             
             </div>
         </nav>
 
