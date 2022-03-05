@@ -21,7 +21,8 @@ const duenos = [
     { valor: "Otto", etiqueta: "Otto" }]
 
 function Modal({ cambiarModal = () => { }, manejarInput = () => { }
-    , crearEntidad = () => { } }) {
+    , crearEntidad = () => { } } ,
+    objeto = {}) {
 
     return (
         <>
@@ -36,7 +37,8 @@ function Modal({ cambiarModal = () => { }, manejarInput = () => { }
                                         <Select nombreCampo="tipo"
                                             options={tiposMascota}
                                             placeholder="Tipo Animal"
-                                            onChange={manejarInput} />
+                                            onChange={manejarInput} 
+                                            value = {objeto.tipo}/>
                                     </div>
                                 </div>
                                 <div className="form-row">
@@ -44,14 +46,16 @@ function Modal({ cambiarModal = () => { }, manejarInput = () => { }
                                         <Input tipo="text"
                                             nombreCampo="nombre"
                                             onInput={manejarInput}
-                                            placeholder="Nombre" />
+                                            placeholder="Nombre" 
+                                            value ={objeto.nombre}/>
                                     </div>
 
                                     <div className="col-md-2">
                                         <Select options={duenos}
                                             nombreCampo="propietario"
                                             onChange={manejarInput}
-                                            placeholder="Dueño" />
+                                            placeholder="Dueño"
+                                            value = {objeto.propietario} />
                                     </div>
                                 </div>
 

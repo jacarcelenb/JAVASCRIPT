@@ -1,13 +1,20 @@
 import React from "react";
 import "./Input.css"
 
-function Input ({tipo= "text" , nombreCampo , onInput = () =>{} ,placeholder}){
+function Input ({tipo= "text" 
+, nombreCampo 
+, onInput = () =>{} 
+,placeholder ,
+value = "" ,
+defaultvalue}){
  return(
     <input type={tipo}
     className="form-control"
     name={nombreCampo}
     placeholder={placeholder}
-    onInput={onInput}/>
+    onInput={onInput}
+    value={value}
+    defaultValue={value}/>
  )
 }
 

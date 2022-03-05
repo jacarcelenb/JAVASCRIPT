@@ -12,12 +12,14 @@ class Pagina extends Component {
             mostrarModal: false,
             entidades: [],
             objeto: {},
+            idObjeto : null,
+            method: "POST",
         };
        
     }
     // codigo del componente
-    cambiarModal = () =>{
-    this.setState({mostrarModal: !this.state.mostrarModal})
+    cambiarModal = (evento , method = "POST") =>{
+    this.setState({mostrarModal: !this.state.mostrarModal , method})
     };
 
     // listar entidades
@@ -38,11 +40,22 @@ class Pagina extends Component {
     };
     crearEntidad = async () => {
         const {entidad} = this.props;
-        const {objeto} = this.state;
-        const method = "POST";
+        const {objeto , method} = this.state;
         await CrearEntidad({entidad ,objeto , method})
         this.cambiarModal();
         this.Listar();
+
+        
+    }
+
+    editarEntidad =  (evento , index ) => {
+        const {entidad} = this.props;
+        const objeto = {...this.state.entidades[index]};
+        this.setState({objeto , idObjeto: index} , async ()=>{
+            this.cambiarModal(null , "PUT");
+         
+        })
+       
 
     }
 
@@ -62,11 +75,14 @@ class Pagina extends Component {
 
                 <ActionMenu  
                 cambiarModal = {this.cambiarModal} titulo = {titulo}/>
-                <Tabla  entidades = {this.state.entidades}/>
+                <Tabla  entidades = {this.state.entidades} 
+                editarEntidad = {this.editarEntidad}/>
                 { this.state.mostrarModal && <Modal  
                 cambiarModal = {this.cambiarModal} 
                 manejarInput = {this.manejarInput}
-                crearEntidad = {this.crearEntidad}/>}
+                crearEntidad = {this.crearEntidad}
+                objeto ={this.state.objeto}
+                />}
               
 
             </div>);
