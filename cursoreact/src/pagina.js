@@ -13,6 +13,7 @@ class Pagina extends Component {
             objeto: {},
             idObjeto: null,
             method: "POST",
+            columnas: [],
         };
 
     }
@@ -25,7 +26,13 @@ class Pagina extends Component {
     Listar = async () => {
         const { entidad } = this.props
         const entidades = await ListarEntidad(entidad);
-        this.setState({ entidades })
+        let columnas = []
+        if (Array.isArray(entidades) && entidades.length > 0) {
+            columnas = Object.keys(entidades[0]) || [];
+        }
+
+        this.setState({entidades , columnas});
+       
     }
 
     manejarInput = (evento) => {
