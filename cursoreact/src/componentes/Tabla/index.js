@@ -14,7 +14,8 @@ function Tabla({entidades = [] , editarEntidad = () =>{} ,eliminarEntidad = () =
                 { entidades.map((entidad, indice) => (
                         <Fila key={indice} entidad={entidad} indice={indice} 
                         editarEntidad = {editarEntidad}
-                        eliminarEntidad = {eliminarEntidad}/>
+                        eliminarEntidad = {eliminarEntidad}
+                        columnas = {columnas}/>
                     ))}
             </tbody>
         </table>)

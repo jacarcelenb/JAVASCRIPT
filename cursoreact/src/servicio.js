@@ -5,7 +5,6 @@ export const ListarEntidad = async ({ entidad = "mascotas" }) => {
         const datos = await respuesta.json();
         return datos;
     } catch (error) {
-        console.log({ error });
     }
 };
 
