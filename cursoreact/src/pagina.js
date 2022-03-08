@@ -96,6 +96,7 @@ class Pagina extends Component {
                     manejarInput={this.manejarInput}
                     crearEntidad={this.crearEntidad}
                     objeto={this.state.objeto}
+                    columnas = {this.state.columnas}
                 />}
 
             </>
