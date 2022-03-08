@@ -4,7 +4,10 @@ import Fila from "./Fila";
 import "../Tabla/Tabla.css";
 import "../Tabla/Encabezado.css";
 
-function Tabla({entidades = [] , editarEntidad = () =>{} ,eliminarEntidad = () =>{}}) {
+function Tabla({entidades = [] 
+    , editarEntidad = () =>{} 
+    ,eliminarEntidad = () =>{} ,
+     columnas = [] ,}) {
   
     const columnas = entidades.length > 0 ? Object.keys(entidades[0]) : []
     return (
