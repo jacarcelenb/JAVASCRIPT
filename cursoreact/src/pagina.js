@@ -2,7 +2,22 @@ import React, { Component } from 'react';
 import ActionMenu from './componentes/ActionsMenu';
 import Tabla from './componentes/Tabla/index';
 import Modal from './componentes/Modal/index';
+import Input from './componentes/Input';
+import Select from './componentes/Select';
 import { ListarEntidad, CrearEntidad, EliminarEntidad } from "./servicio";
+
+const ComponentCampo ={
+    tipo: Select,
+    nombre:Input,
+    dueno: Input,
+    apellido: Input,
+    documento: Input,
+    mascota: Select,
+    veterinaria: Select,
+    diagnostico: Select,
+    historia: Input,
+}
+
 
 class Pagina extends Component {
     constructor(props) {
@@ -97,7 +112,13 @@ class Pagina extends Component {
                     crearEntidad={this.crearEntidad}
                     objeto={this.state.objeto}
                     columnas = {this.state.columnas}
-                />}
+                 
+                > 
+                   {columnas.map((columna , index) => {
+                     const Componente = ComponentCampo[columna]
+                     return <Componente/>;
+                    })}
+                </Modal>}
 
             </>
         );

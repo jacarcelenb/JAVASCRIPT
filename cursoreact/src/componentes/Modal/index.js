@@ -22,7 +22,8 @@ const duenos = [
 
 function Modal({ cambiarModal = () => { }, manejarInput = () => { }
     , crearEntidad = () => { } } ,
-    objeto = {}) {
+    objeto = {} ,
+    children = []) {
 
     return (
         <>
