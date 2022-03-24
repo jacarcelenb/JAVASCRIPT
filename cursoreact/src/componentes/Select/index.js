@@ -5,7 +5,9 @@ function Select ({options = [] , nombreCampo = "vacio" , onChange = () =>{} ,
 placeholder,
 value = "" ,}){
 return (
-    <select className="form-control" onChange={onChange} 
+    <select 
+    id={nombreCampo}
+    className="form-control" onChange={onChange} 
     name={nombreCampo} placeholder={placeholder}
     defaultValue={value}> 
     <option value="">Seleccione {placeholder}</option>

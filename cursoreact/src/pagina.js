@@ -6,17 +6,49 @@ import Input from './componentes/Input';
 import Select from './componentes/Select';
 import { ListarEntidad, CrearEntidad, EliminarEntidad } from "./servicio";
 
-const ComponentCampo ={
-    tipo: Select,
-    nombre:Input,
-    dueno: Input,
-    apellido: Input,
-    documento: Input,
-    mascota: Select,
-    veterinaria: Select,
-    diagnostico: Select,
-    historia: Input,
+
+const tiposMascota = [{
+    valor: "Tipo animal",
+    etiqueta: "Tipo animal"
+},
+{ valor: "Perro", etiqueta: "Perro" }
+    , { valor: "Gato", etiqueta: "Gato" },
+{ valor: "Pajaro", etiqueta: "Pajaro" },
+{ valor: "Otro", etiqueta: "Otro" }]
+
+const ComponentCampo=({manejarInput = () => {} , objeto ={} ,nombreCampo=""}) =>{
+switch(nombreCampo){
+    case 'tipo':
+    case  'mascota':
+    case   'veterinaria':
+    case   'diagnostico':
+    case   'propietario':
+       return  (<Select
+        options={tiposMascota}
+        onChange={manejarInput}
+        placeholder={nombreCampo}
+        value={objeto[nombreCampo]}
+        />)
+
+        case 'nombre':
+        case 'propietario':
+        case 'apellido':
+        case 'documento':
+        case 'historia':
+            return(
+                <Input
+                nombreCampo={nombreCampo}
+                tipo="text"
+                onInput={manejarInput}
+                placeholder={nombreCampo}
+                value={objeto[nombreCampo]}
+                />
+            );
+            default:
+                return false;
 }
+    
+};
 
 
 class Pagina extends Component {
@@ -106,24 +138,27 @@ class Pagina extends Component {
                 <Tabla entidades={this.state.entidades}
                     editarEntidad={this.editarEntidad}
                     eliminarEntidad={this.eliminarEntidad} />
-                {this.state.mostrarModal && <Modal
+                {this.state.mostrarModal && (
+                <Modal
                     cambiarModal={this.cambiarModal}
                     manejarInput={this.manejarInput}
                     crearEntidad={this.crearEntidad}
                     objeto={this.state.objeto}
-                    columnas = {this.state.columnas}
-                 
-                > 
-                   {columnas.map((columna , index) => {
-                     const Componente = ComponentCampo[columna]
-                     return <Componente/>;
-                    })}
-                </Modal>}
+                    columnas = {this.state.columnas} > 
+                   {columnas.map((columna , index) => (
+                     (<ComponentCampo
+                        key={index} 
+                        manejarInput={manejarInput} 
+                        objeto={this.state.objeto}
+                        nombreCampo={columna}
+                        options={columna==="tipo" ? tiposMascota: propietarios}/>
+                   )))}
+                </Modal>
+                )}
 
             </>
         );
     }
-
 }
 
 // exportar el componenete de REACT
