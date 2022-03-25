@@ -1,5 +1,17 @@
 const API_URL = "https://veterianaria-backend.vercel.app/"
-export const ListarEntidad = async ({ entidad = "mascotas" }) => {
+export const ListarEntidad = async ({ entidad = "mascotas" , idObjeto=null}) => {
+    if (!idObjeto || !entidad) {
+        return {};
+    }
+    try {
+        const respuesta = await fetch(`${API_URL}/${entidad}/${idObjeto}`)
+        const datos = await respuesta.json();
+        return datos;
+    } catch (error) {
+    }
+};
+
+export const Listaruna = async ({ entidad = "mascotas" }) => {
     try {
         const respuesta = await fetch(`${API_URL}/${entidad}`)
         const datos = await respuesta.json();

@@ -1,9 +1,11 @@
-import React from "react";
+import React ,{useState , useEffect}from "react";
 import ModalHeader from "./ModalHeader";
 import Select from "../Select";
 import "./Modal.css"
 import Input from "../Input";
 import { ModalFooter } from "./ModalFooter";
+import { useEffect, useState } from "react";
+import { Listaruna } from "../../servicio";
 
 const tiposMascota = [{
     valor: "Tipo animal",
@@ -20,10 +22,11 @@ const duenos = [
     { valor: "Pamela", etiqueta: "Pamela" },
     { valor: "Otto", etiqueta: "Otto" }]
 
-function Modal({ cambiarModal = () => { }, manejarInput = () => { }
+function Modal({ cambiarModal = () => { }
     , crearEntidad = () => { } } ,
     objeto = {} ,
     children = []) {
+
 
     return (
         <>
