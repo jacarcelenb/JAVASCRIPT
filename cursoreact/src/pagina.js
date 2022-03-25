@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import ActionMenu from './componentes/ActionsMenu';
 import Tabla from './componentes/Tabla/index';
 import Modal from './componentes/Modal/index';
-import Input from './componentes/Input';
-import Select from './componentes/Select';
+import ComponentCampo from './componentes/ComponenteCampo';
 import { ListarEntidad, CrearEntidad, EliminarEntidad } from "./servicio";
 
 
@@ -16,39 +15,7 @@ const tiposMascota = [{
 { valor: "Pajaro", etiqueta: "Pajaro" },
 { valor: "Otro", etiqueta: "Otro" }]
 
-const ComponentCampo=({manejarInput = () => {} , objeto ={} ,nombreCampo=""}) =>{
-switch(nombreCampo){
-    case 'tipo':
-    case  'mascota':
-    case   'veterinaria':
-    case   'diagnostico':
-    case   'propietario':
-       return  (<Select
-        options={tiposMascota}
-        onChange={manejarInput}
-        placeholder={nombreCampo}
-        value={objeto[nombreCampo]}
-        />)
 
-        case 'nombre':
-        case 'propietario':
-        case 'apellido':
-        case 'documento':
-        case 'historia':
-            return(
-                <Input
-                nombreCampo={nombreCampo}
-                tipo="text"
-                onInput={manejarInput}
-                placeholder={nombreCampo}
-                value={objeto[nombreCampo]}
-                />
-            );
-            default:
-                return false;
-}
-    
-};
 
 
 class Pagina extends Component {
@@ -150,8 +117,7 @@ class Pagina extends Component {
                         key={index} 
                         manejarInput={manejarInput} 
                         objeto={this.state.objeto}
-                        nombreCampo={columna}
-                        options={columna==="tipo" ? tiposMascota: propietarios}/>
+                        nombreCampo={columna}/>
                    )))}
                 </Modal>
                 )}
