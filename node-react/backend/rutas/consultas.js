@@ -7,11 +7,38 @@ module.exports = function consultasHandler({consultas , veterinarios , mascotas}
                 }
                 return callback(404, { mensaje: `consulta con indice ${data.indice} no encontrado` });
             }
-            const ConsultasRelacionadas =  consultas.map((consulta) =>(
+
+            let _consultas = [...consultas];
+
+            if (data.query && typeof data.query.mascota !=="undefined" || 
+            data.query.veterinario !== "undefined" ||
+            data.query.historia !== "undefined" ||
+            data.query.diagnostico !== "undefined") {
+             const llavesQuery = Object.keys(data.query);
+             let respuestaConsultas = [...consultas];
+             let resultado = false;
+           
+             for(const llave of llavesQuery){
+              _consultas =_consultas.filter((_consulta)=>{
+               
+                 if (llave ==='diagnostico' || llave==='historia') {
+                    const expresionRegular = new RegExp(data.query[llave],"ig");
+                    resultado = _consulta[llave].match(expresionRegular);
+                }
+                if (llave ==='veterinario' || llave ==='mascota') {
+                    resultado = _consulta[llave] == data.query[llave];
+                }
+                 
+                 return resultado ;
+               });
+             }
+            } 
+            _consultas =  _consultas.map((consulta) =>(
                 {...consulta, mascota:{ ...mascotas[consulta.mascota], id: consulta.mascota},
                 veterinario: {...veterinarios[consulta.veterinario] , id: consulta.veterinario}}
             ));
-            callback(200, ConsultasRelacionadas);
+           
+            callback(200, _consultas);
         },
         post: (data, callback) => {
             let nuevaconsulta = data.payload;
