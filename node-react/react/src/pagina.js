@@ -3,10 +3,10 @@ import ActionsMenu from "./componentes/ActionsMenu";
 import Tabla from "./componentes/Tabla";
 import Modal from "./componentes/Modal";
 import {
-  ListarEntidad,
-  CrearEntidad,
-  EliminarEntidad,
-  Listaruna,
+  listarEntidad,
+  crearEditarEntidad,
+  eliminarEntidad,
+  obtenerUno,
 } from "./servicio";
 import ComponenteCampo from "./componentes/ComponenteCampo";
 
@@ -24,8 +24,8 @@ const opcionesIniciales = {
     { valor: "Parvovirosis", etiqueta: "Parvovirosis" },
   ],
   mascota: [],
-  veterinario: [],
-  propietario: [],
+  veterinaria: [],
+  dueno: [],
 };
 
 class Pagina extends Component {
@@ -39,6 +39,9 @@ class Pagina extends Component {
       method: "POST",
       columnas: [],
       options: opcionesIniciales,
+      search: "",
+      veterinaria: "",
+      mascota: "",
     };
   }
 
@@ -54,14 +57,24 @@ class Pagina extends Component {
     this.obtenerOpcionesBackend(_newState);
   };
 
-  listar = async () => {
-    const { entidad } = this.props;
-    const entidades = await listarEntidad({ entidad });
-    let columnas = [];
-    if (Array.isArray(entidades) && entidades.length > 0) {
-      columnas = Object.keys(entidades[0]) || [];
+  listar = async (_evento = null) => {
+    if (_evento) {
+      _evento.preventDefault();
     }
-    this.setState({ entidades, columnas });
+    const { entidad } = this.props;
+    const { search, columnas, veterinaria, mascota } = this.state;
+    const entidades = await listarEntidad({
+      entidad,
+      search,
+      columnas,
+      veterinaria,
+      mascota,
+    });
+    let _columnas = [];
+    if (Array.isArray(entidades) && entidades.length > 0) {
+      _columnas = Object.keys(entidades[0]) || [];
+    }
+    this.setState({ entidades, columnas: _columnas });
   };
 
   manejarInput = (evento) => {
@@ -76,16 +89,16 @@ class Pagina extends Component {
   crearEntidad = async (_evento = null) => {
     const { entidad } = this.props;
     let { objeto, method, idObjeto } = this.state;
-    await CrearEntidad({ entidad, objeto, method, idObjeto });
+    await crearEditarEntidad({ entidad, objeto, method, idObjeto });
     this.cambiarModal();
   };
 
   obtenerOpcionesBackend = async (newState) => {
     const { options } = this.state;
-    const mascotasPromise =ListarEntidad({ entidad: "mascotas" });
-    const veterinariasPromise = ListarEntidad({ entidad: "veterinarios" });
-    const duenosPromise = listarEntidad({ entidad: "propietarios" });
-    let [mascota = [], veterinario = [], propietario = []] = await Promise.all([
+    const mascotasPromise = listarEntidad({ entidad: "mascotas" });
+    const veterinariasPromise = listarEntidad({ entidad: "veterinarias" });
+    const duenosPromise = listarEntidad({ entidad: "duenos" });
+    let [mascota = [], veterinaria = [], dueno = []] = await Promise.all([
       mascotasPromise,
       veterinariasPromise,
       duenosPromise,
@@ -94,15 +107,15 @@ class Pagina extends Component {
       valor: index.toString(),
       etiqueta: `${_mascota.nombre} (${_mascota.tipo})`,
     }));
-    veterinario = veterinario.map((_veterinario, index) => ({
+    veterinaria = veterinaria.map((_veterinaria, index) => ({
       valor: index.toString(),
-      etiqueta: `${_veterinario.nombre} ${_veterinario.apellido}`,
+      etiqueta: `${_veterinaria.nombre} ${_veterinaria.apellido}`,
     }));
-    propietario = propietario.map((_propietario, index) => ({
+    dueno = dueno.map((_dueno, index) => ({
       valor: index.toString(),
-      etiqueta: `${_propietario.nombre} ${_propietario.apellido}`,
+      etiqueta: `${_dueno.nombre} ${_dueno.apellido}`,
     }));
-    const nuevasOpciones = { ...options, mascota, veterinario, propietario};
+    const nuevasOpciones = { ...options, mascota, veterinaria, dueno };
     this.setState({ ...newState, options: nuevasOpciones }, () => {
       this.listar();
     });
@@ -110,18 +123,31 @@ class Pagina extends Component {
 
   editarEntidad = async (_evento, index) => {
     const { entidad } = this.props;
-    const objeto = await Listaruna({ entidad, idObjeto: index });
+    const objeto = await obtenerUno({ entidad, idObjeto: index });
     const newState = { objeto, idObjeto: index };
     this.cambiarModal(null, "PUT", newState);
   };
 
   eliminarEntidad = async (_evento, index) => {
     const { entidad } = this.props;
-    const respuesta = await EliminarEntidad({ entidad, idObjeto: index });
+    const respuesta = await eliminarEntidad({ entidad, idObjeto: index });
     this.listar();
   };
 
+  manejarSearchInput = (evento) => {
+    const {
+      target: { value, name },
+    } = evento;
+    console.log({ value, name });
+    this.setState({ [name]: value });
+  };
+
   componentDidMount() {
+    const { entidad } = this.props;
+    if (entidad === "consultas") {
+      this.obtenerOpcionesBackend({});
+      return;
+    }
     this.listar();
   }
 
@@ -133,7 +159,14 @@ class Pagina extends Component {
     const { columnas, idObjeto, entidades, objeto, options } = this.state;
     return (
       <>
-        <ActionsMenu cambiarModal={this.cambiarModal} titulo={titulo} />
+        <ActionsMenu
+          cambiarModal={this.cambiarModal}
+          titulo={titulo}
+          manejarSearchInput={this.manejarSearchInput}
+          buscar={this.listar}
+          entidad={entidad}
+          options={options}
+        />
         <Tabla
           entidades={entidades}
           editarEntidad={this.editarEntidad}

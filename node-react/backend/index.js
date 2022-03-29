@@ -1,12 +1,9 @@
-//console.log("hola mundo");
-// comando node seguido del nombre del archivo.js ejecuta ese archivo en node js
-const http = require('http');
-const requestHandler = require('./request-handler');
-const recursos = require('./recursos');
-global.recursos = recursos;
+const http = require("http");
+const requestHandler = require("./request-handler");
+const server = http.createServer(requestHandler);
 
-const server = http.createServer(requestHandler)
-server.listen(8000, () => {
-  console.log('server listen in http://localhost:8000/');
+server.listen(5000, () => {
+  console.log(
+    "el servidor está escuchando peticiones en http://localhost:5000/"
+  );
 });
-

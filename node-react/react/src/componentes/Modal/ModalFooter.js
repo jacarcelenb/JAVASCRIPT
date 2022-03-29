@@ -1,14 +1,28 @@
-import React from 'react'
-import "./ModalFooter.css"
-export const ModalFooter = ({cambiarModal = () => {} , crearEntidad = () => {}}) => {
-    return (
-        <div className="modal-footer">
-            <button id="btn-cancelar" type="button" className="btn btn-secondary"
-                onClick={cambiarModal}>Cancelar</button>
-            <button id="btn-guardar" type="button"
-                className="btn btn-primary"
-                onClick={crearEntidad}
-                >Guardar</button>
-        </div>
-    )
+import React from "react";
+import "./ModalFooter.css";
+
+function ModalFooter({ cambiarModal = () => {}, crearEntidad = () => {} }) {
+  return (
+    <div className="modal-footer">
+      <button
+        onClick={cambiarModal}
+        type="button"
+        className="btn btn-secondary"
+        data-dismiss="modal"
+      >
+        Cerrar
+      </button>
+      <button
+        onClick={crearEntidad}
+        type="button"
+        className="btn btn-primary"
+        data-dismiss="modal"
+        id="btn-guardar"
+      >
+        Crear
+      </button>
+    </div>
+  );
 }
+
+export default ModalFooter;

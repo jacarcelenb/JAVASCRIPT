@@ -1,5 +1,4 @@
 import React from "react";
-import Search from "../Search";
 import { Link } from "react-router-dom"
 import './navbar.css'
 
@@ -32,7 +31,6 @@ function Navbar() {
                         </Link>
                     </li>
                 </ul>
-                <Search />
             </div>
         </nav>
 

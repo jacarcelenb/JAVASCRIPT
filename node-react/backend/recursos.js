@@ -1,26 +1,39 @@
 module.exports = {
-    mascotas: [
-        { tipo: "Perro", nombre: "Trusky0", propietario: "Camilo" },
-        { tipo: "Perro", nombre: "Trusky1", propietario: "Camilo" },
-        { tipo: "Perro", nombre: "Trusky2", propietario: "Camilo" },
-        { tipo: "Perro", nombre: "Trusky3", propietario: "Jorge" }
-    ],
-    veterinarios: [
-        {nombre: "Lucia", apellido: "Mina" , documento: "1005400184"},
-        {nombre: "Ana", apellido: "Casa" , documento: "1005400190"},
-        {nombre: "Jose", apellido: "Alvarez" , documento: "1235400164"},
-        {nombre: "James", apellido: "Mena" , documento: "1987400184"},
-    ],
-
-    propietarios: [
-        {nombre: "Luis", apellido: "Mendez" , documento: "1005400154"},
-        {nombre: "Alex", apellido: "Garcia" , documento: "1785400152"},
-        {nombre: "Carmen", apellido: "Loma" , documento: "1335400151"},
-        {nombre: "Jaime", apellido: "Mendez" , documento: "1205400159"},
-    ],
-
-    consultas: [
-       {mascota: 0 , veterinario: 0 , diagnostico: "Enfermedad",historia: "",fechaCreacion: new Date() , fechaEdicion: new Date()}, 
-    ]
-
-}
+  mascotas: [
+    { tipo: "Perro", nombre: "Trosky0", dueno: "Camilo" },
+    { tipo: "Perro", nombre: "Trosky1", dueno: "Camilo" },
+    { tipo: "Perro", nombre: "Trosky2", dueno: "Camilo" },
+    { tipo: "Perro", nombre: "Trosky3", dueno: "Camilo" },
+    { tipo: "Perro", nombre: "Trosky4", dueno: "Camilo" },
+  ],
+  veterinarias: [
+    { nombre: "Alexandra", apellido: "Perez", documento: "1234567890" },
+    { nombre: "Alexander", apellido: "Gómez", documento: "4234569999" },
+    { nombre: "Julián", apellido: "Madrid", documento: "555666777" },
+    { nombre: "Naryie", apellido: "Vasquez", documento: "1000666777" },
+  ],
+  duenos: [
+    { nombre: "Alejandra", apellido: "Ramirez", documento: "12343333890" },
+    { nombre: "Alexandra", apellido: "Fernandez", documento: "4234564321" },
+    { nombre: "Julio", apellido: "Tamayo", documento: "456666777" },
+    { nombre: "Natalia", apellido: "Gonzales", documento: "9000666777" },
+  ],
+  consultas: [
+    {
+      mascota: 0,
+      veterinaria: 0,
+      fechaCreacion: new Date(),
+      fechaEdicion: new Date(),
+      historia: "historia1",
+      diagnostico: "diagnostico1",
+    },
+    {
+      mascota: 1,
+      veterinaria: 2,
+      fechaCreacion: new Date(),
+      fechaEdicion: new Date(),
+      historia: "historia 2",
+      diagnostico: "diagnostico 2",
+    },
+  ],
+};
