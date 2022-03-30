@@ -6,17 +6,13 @@ module.exports = function mascotasHandler(mascotas) {
     get: async (data, callback) => {
       console.log("handler mascotas", { data });
       if (typeof data.indice !== "undefined") {
-      return obtenerUno({
+      const resultado = await obtenerUno({
           directorioEntidad:'mascotas' 
         , nombreArchivo: data.indice,
-      },(error,_mascota)=>{
-        if (error) {
-          return callback(500, {
-            mensaje: `mascota con indice ${data.indice} no fue encontada en el archivo`,
-          });
-        }
-        return callback(200 , _mascota)
-      })
+      });
+
+      return callback(200, _mascota);
+    
         if (mascotas[data.indice]) {
           return callback(200, mascotas[data.indice]);
         }
