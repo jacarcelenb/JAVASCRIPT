@@ -28,7 +28,25 @@ fs.open(`${directorioBase}/${directorioEntidad}/${nombreArchvio}.json`,"wx",
         callback(new Error("No se pudo crear el archivo"))
     }
 })
-}
-}
+},
+obtenerUno:({directorioEntidad = "mascotas" , nombreArchivo} , callback)=>{
+    fs.readFile(`${directorioBase}/${directorioEntidad}/${nombreArchivo}.json`,'utf-8' ,
+    (error , dataArchivo)=>{
+        if (error) {
+            return callback(new Error("No se pudo leer el archivo o no existe"));
+        }
+        return callback(false,dataArchivo);
+    })
+},listar : ({directorioEntidad="mascotas"} ,callback) =>{
+    fs.readdir(`${directorioBase}/${directorioEntidad}/` ,(error , (files)=>{
+        if (error) {
+            return callback(new Error(`No se pudo listar desde  ${directorioBase}`));
+        }
+        files = files.filter((file)=>file.includes(".json"));
+        console.log(files);
+    }))
+},
+};
 
+dataHandler.listar({} , () =>{});
 module.exports = dataHandler;
