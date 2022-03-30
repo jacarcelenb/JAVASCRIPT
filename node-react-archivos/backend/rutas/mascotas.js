@@ -1,9 +1,9 @@
-const { crear ,obtenerUno } = require("../data-handler");
+const { crear ,obtenerUno , listar } = require("../data-handler");
 const entidad = "mascotas";
 
 module.exports = function mascotasHandler(mascotas) {
   return {
-    get: (data, callback) => {
+    get: async (data, callback) => {
       console.log("handler mascotas", { data });
       if (typeof data.indice !== "undefined") {
       return obtenerUno({
@@ -69,7 +69,17 @@ module.exports = function mascotasHandler(mascotas) {
 
         return callback(200, respuestaMascotas);
       }
-      callback(200, mascotas);
+      try {
+         const _mascotas = await listar({directorioEntidad:"mascotas"} ,(error, _mascotas)=>{
+         
+          callback(200, _mascotas);
+        });
+      } catch (error) {
+        if (error) {
+          return callback(500 , {mensaje: error.message});
+        }
+      }
+      
     },
     post: (data, callback) => {
       if (data && data.payload && data.payload.id) {

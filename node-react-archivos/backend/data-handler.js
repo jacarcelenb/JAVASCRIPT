@@ -37,16 +37,27 @@ obtenerUno:({directorioEntidad = "mascotas" , nombreArchivo} , callback)=>{
         }
         return callback(false,dataArchivo);
     })
-},listar : ({directorioEntidad="mascotas"} ,callback) =>{
-    fs.readdir(`${directorioBase}/${directorioEntidad}/` ,(error , (files)=>{
-        if (error) {
-            return callback(new Error(`No se pudo listar desde  ${directorioBase}`));
-        }
-        files = files.filter((file)=>file.includes(".json"));
-        console.log(files);
-    }))
-},
-};
+},listar : async ({directorioEntidad="mascotas"}) =>{
+    try {
+        let archivos = await fs.promises.readdir(`${directorioBase}/${directorioEntidad}/`);
+        archivos = archivos.filter((file)=>file.includes(".json"));
+        const arrayPromesasLeerArchivo = archivos.map((archivo)=>{
+            return fs.promises.readFile(`${directorioBase}/${directorioEntidad}/${archivo}` ,
+            {encoding: "utf-8"})
+        });
+        
+        let datosArchivos = await Promise.all(arrayPromesasLeerArchivo);
+        datosArchivos = datosArchivos.map(JSON.parse);
+        return datosArchivos;
+
+    } catch (error) {
+        return new Error(`No se pudo listar desde  ${directorioBase}`);
+    }
+  
+    
+}
+}
+
 
 dataHandler.listar({} , () =>{});
 module.exports = dataHandler;
