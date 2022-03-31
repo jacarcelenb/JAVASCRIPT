@@ -91,7 +91,6 @@ module.exports = (req, res) => {
         if (typeof mensaje ==="object") {
           respuesta = JSON.stringify(mensaje);
         }
-        const respuesta = JSON.stringify(mensaje);
         res.setHeader("Content-Type", "application/json");
         res.writeHead(statusCode);
         // linea donde realmente ya estamos respondiendo a la aplicación cliente
