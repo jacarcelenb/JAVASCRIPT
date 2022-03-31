@@ -1,19 +1,9 @@
 const fs = require("fs")
 const path = require("path");
-
+const util = require("util");
 const directorioBase = path.join(__dirname,"data");
 
-const readFilePromesa = ({rutaArchivo })=>{
-return new Promise((resolve , reject)=>{
-    fs.readFile(rutaArchivo,'utf-8' ,(error , dataArchivo)=>{
-        if (error) {
-            return reject(new Error("No se pudo leer el archivo o no existe"));
-        }
-        return resolve(dataArchivo);
-    });
-});    
-};
-
+const readFilePromesa = util.promisify(fs.readFile);
 const dataHandler = {
 crear: ({directorioEntidad,nombreArchvio,datosGuardar}, callback) =>{
 fs.open(`${directorioBase}/${directorioEntidad}/${nombreArchvio}.json`,"wx",
@@ -45,7 +35,7 @@ obtenerUno: async (
 ) =>{
   
     try {
-        const resultado = await readFilePromesa({rutaArchivo: `${directorioBase}/${directorioEntidad}/${nombreArchvio}.json` })
+        const resultado = await readFilePromesa(`${directorioBase}/${directorioEntidad}/${nombreArchvio}.json` , "utf-8")
         return resultado;
     } catch (error) {
         return new Error(`No se pudo listar desde  ${directorioBase}`);
