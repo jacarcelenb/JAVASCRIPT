@@ -31,11 +31,19 @@ fs.open(`${directorioBase}/${directorioEntidad}/${nombreArchvio}.json`,"wx",
 })
 },
 obtenerUno: async (
-    {directorioEntidad= "mascotas",nombreArchvio}, callback
+    {directorioEntidad= "mascotas",nombreArchvio , agregarExtension= true},
 ) =>{
   
     try {
-        const resultado = await readFilePromesa(`${directorioBase}/${directorioEntidad}/${nombreArchvio}.json` , "utf-8")
+        let archivo = null;
+        if (agregarExtension) {
+            archivo= `${directorioBase}/${directorioEntidad}/${nombreArchvio}.json`;
+        }else{
+            archivo= `${directorioBase}/${directorioEntidad}/${nombreArchvio}`;
+        }
+        const resultado = await  fs.promises.readFile(
+           archivo, {encoding:"utf-8"}
+        );
         return resultado;
     } catch (error) {
         return new Error(`No se pudo listar desde  ${directorioBase}`);
@@ -45,8 +53,7 @@ obtenerUno: async (
         let archivos = await fs.promises.readdir(`${directorioBase}/${directorioEntidad}/`);
         archivos = archivos.filter((file)=>file.includes(".json"));
         const arrayPromesasLeerArchivo = archivos.map((archivo)=>{
-            return fs.promises.readFile(`${directorioBase}/${directorioEntidad}/${archivo}` ,
-            {encoding: "utf-8"})
+            return dataHandler.obtenerUno({directorioEntidad ,nombreArchvio: archivo , agregarExtension: false})
         });
         
         let datosArchivos = await Promise.all(arrayPromesasLeerArchivo);
